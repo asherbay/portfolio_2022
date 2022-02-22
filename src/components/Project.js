@@ -17,7 +17,7 @@ const Project = (props) => {
     }
 
     return (
-        <Body y={-15}>
+        <Body y={-15} >
             <section style={{display: "flex", gap: "30px"}}>
                 <img src={props.pic} style={{width: "300px", alignSelf: "center"}}/>
                 <section style={{display: "flex", flexDirection: "column", justifyItems: "flex-start",  position: "relative", width: "100%",}}>
@@ -26,7 +26,7 @@ const Project = (props) => {
                     
                     <section style={{display: "flex", gap: "10px", alignItems: "center", marginBottom: "0px",}}>
                     {/* <p style={{fontSize: "15pt"}}>Made with:</p> */}
-                    <p style={{fontSize: "15pt", marginTop: "0px", marginBottom: "0px", right: "0px", position: "relative"}}>Made with:</p>
+                    <p style={{fontSize: "15pt", marginTop: "0px", marginBottom: "0px", position: "relative"}}>Made with:</p>
                         {props.techTags && renderTechTags()}
                         {/* <TechTag>React</TechTag>
                         <TechTag>P5.js</TechTag>
