@@ -8,7 +8,7 @@ import pic from '../images/smile001.png'
 const Home = () => {
 
     return (
-        <Body y={80}>
+        <Body y={150}>
            {/* <ProfPic src={pic} onClick={()=>{}} /> */}
         I'm Asher Bay, a full stack web developer in Salt Lake City, Utah. I love building systems and solving interesting problems with code.<br/> My current stack is React with Ruby on Rails and a PostgreSQL database. <br/>I graduated from DevPoint Labs in their Winter 2021 cohort. Since then I've enjoyed continuing to learn and build.
         </Body>

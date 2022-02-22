@@ -35,7 +35,8 @@ const NavLink = styled(Link)`
     border: 3px solid white;
     padding: 4px;
     padding-right: 10px;
-
+    margin-top: 30px;
+    display: block;
     &:hover {
         color: red;
   }
@@ -53,7 +54,7 @@ const NamePlate = styled(NavLink)`
         font-size: 45pt;
         padding: 4px;
         
-
+        display: block;
         &:hover {
             color: red;
     }
@@ -64,10 +65,10 @@ const NamePlate = styled(NavLink)`
 
 
 const NavLinks = styled.nav`
-    display: flex;
+    display: inline;
     flex-direction: column;
     gap: 30px;
-    
+    flex-basis: auto;
     align-items: center;
     
     order: 1;

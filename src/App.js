@@ -17,14 +17,15 @@ function App() {
   }
 
   return (
-    <div style={{background: "#656565", display: 'flex', justifyContent: 'center', alignItems: 'flex-start', zoom: zoom}}>
-      <Nav />
+    <div style={{background: "#656565",}}>
+      
       <Routes  >
         <Route path='/' element={<Home/>}/>
         <Route path='/projects' element={<Projects/>}/>
         <Route path='/resume' element={<Resume/>}/>
         <Route path='/contact' element={<Contact/>}/>
       </Routes>
+      <Nav />
     </div>
   );
 }
