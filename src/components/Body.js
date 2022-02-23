@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import {styles} from '../Styles'
 const Body = (props) => {
 
     return (
@@ -14,7 +15,8 @@ export default Body
 const Sect = styled.section`
     background-color: transparent;
     border: 3px solid white;
-    width: 35vw;
+    width: ${styles.sectionWidth}vw;
+
     padding: 30px;
     margin: 15px;
     color: white;

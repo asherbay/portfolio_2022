@@ -1,40 +1,39 @@
 import React from 'react'
 import styled from 'styled-components'
 import Body from '../components/Body'
-
+import useWindowSize from '../hooks/useWindowSize'
+import scale from './Scale'
 //also need to add info about tech used
 
-
+let size
 
 const Project = (props) => {
-    
+    size = useWindowSize()
     const renderTechTags = () => {
         return (
-            props.techTags.map((t)=>{
+            props.techTags.map((t, i)=>{
+                if(i===0){
+                    return (<TechTag style={{marginLeft: "15px"}}>{t}</TechTag>)
+                }
                 return (<TechTag>{t}</TechTag>)
             })
         )
     }
 
     return (
-        <Body y={-15} >
-            <section style={{display: "flex", gap: "30px"}}>
-                <img src={props.pic} style={{width: "300px", alignSelf: "center"}}/>
+        <Body id="boxParent" y={-15} >
+            <ProjBox size={size}>
+                <ProjImg src={props.pic} size={size}/>
                 <section style={{display: "flex", flexDirection: "column", justifyItems: "flex-start",  position: "relative", width: "100%",}}>
                     <a href={props.url} style={{textDecorationColor: "white", textUnderlineOffset: "5px"}}><p style={{marginTop: "0px", marginBottom: "0px", color: "white", }}>{props.name}</p></a>
-                    <p style={{marginTop: "10px", fontSize: "15pt",}}>{props.children}</p>
+                    <p style={{marginTop: "10px", }}>{props.children}</p>
                     
-                    <section style={{display: "flex", gap: "10px", alignItems: "center", marginBottom: "0px",}}>
-                    {/* <p style={{fontSize: "15pt"}}>Made with:</p> */}
-                    <p style={{fontSize: "15pt", marginTop: "0px", marginBottom: "0px", position: "relative"}}>Made with:</p>
-                        {props.techTags && renderTechTags()}
-                        {/* <TechTag>React</TechTag>
-                        <TechTag>P5.js</TechTag>
-                        <TechTag>Tone.js</TechTag> */}
+                    <section style={{display: "flex", gap: "10px", alignItems: "center", marginBottom: "0px", flexDirection: (size.width>590 ? "row" : "column")}}>
+                    <p style={{ marginTop: "0px", marginBottom: "0px", position: "relative"}}>Made <br/>with:</p>
+                            {props.techTags && renderTechTags()}
                     </section>
                 </section>
-                
-            </section>
+            </ProjBox>
         </Body>
     )
 }
@@ -55,4 +54,22 @@ const TechTag = styled.button`
     &:hover {
         cursor: pointer;
     }
+`
+
+const ProjBox = styled.section`
+    display: flex; 
+    flex-direction: ${props => (props.size.width > 1250 ? "row" : "column")};
+    
+    gap: 20px;
+ 
+    p{
+        font-size: 18pt;
+    }
+`
+
+const ProjImg = styled.img`
+    
+    width: 300px;
+    align-self: center;
+
 `
