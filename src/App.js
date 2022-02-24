@@ -74,6 +74,7 @@ const Content = styled.div`
   display: flex;  
   position: relative;
   top: 20px;
+  gap: 10px;
   justify-content: center;
   align-items: flex-start;
   
