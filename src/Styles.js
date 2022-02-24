@@ -7,5 +7,6 @@ export const styles = {
         tag: 13,
     },
     imgWidth: 300,
-    sectionWidth: 50 //vw
+    sectionWidth: 50, //vw
+    bgColor: "#000000",
 }

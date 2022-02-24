@@ -1,19 +1,23 @@
 import logo from './logo.svg';
 import './App.css';
-import {Routes, Route} from 'react-router-dom'
+import {Routes, Route, useLocation} from 'react-router-dom'
 import Nav from './components/Nav'
 import Home from './pages/Home'
 import Projects from './pages/Projects'
+import Projectscopy from './pages/Projectscopy'
 import Resume from './pages/Resume'
 import Contact from './pages/Contact'
 import React, {useState, useEffect, useRef} from 'react'
 import scale from './components/Scale'
 import styled from 'styled-components'
+import {styles} from './Styles'
+
 
 import useWindowSize from './hooks/useWindowSize'
 
 function App() {
-  const [zoom, setZoom] = useState(1)
+  const location = useLocation()
+  const [pageHeight, setPageHeight] = useState(null)
   const windowSize = useWindowSize()
   const ref = useRef(null)
   const [elementWidth, setElementWidth] = useState(ref.current ? ref.current.offsetWidth : null)
@@ -23,27 +27,28 @@ function App() {
     if(ref.current){
       setElementWidth(ref.current.offsetWidth)
     }
-
   }, [])
 
   useEffect(()=>{
-    
-      console.log(elementWidth)
-  }, [elementWidth])
+    console.log("size changed")
+    setPageHeight(Math.max(document.getElementById("root").firstChild.firstChild.scrollHeight, window.innerHeight))
+  }, [document.body.scrollHeight, window.innerHeight, location.pathname])
+
 
   useEffect(()=>{
       if(ref.current){
         setElementWidth(ref.current.offsetWidth)
       }
-      console.log("windowSize: " + windowSize.width)
+      console.log("windowSize: " + window.innerHeight)
+      console.log("docSize: " + document.body.scrollHeight)
   }, [windowSize])
 
 
 
   return (
-    <div id="mainContainer" style={{background: "#656565",}}>
+    <div id="mainContainer" style={{background: styles.bgColor,  margin: "auto", width: "100%", height: pageHeight}}>
       <Content ref={ref} >
-        <Routes>
+        <Routes >
           <Route path='/' element={<Home/>}/>
           <Route path='/projects' element={<Projects/>}/>
           <Route path='/resume' element={<Resume/>}/>
@@ -57,13 +62,19 @@ function App() {
 
 export default App;
 
+//screenCenterX - 
+
+
+
 const Content = styled.div`
+  transform-origin: top center;
   transform: scale(80%);  
-  background: #656565; 
+  background: ${styles.bgColor}; 
+  vertical-align: super;
   display: flex;  
-  justify-content: center;
-  align-items: start;
-  vertical-align: top;
   position: relative;
-  top: -80px;
+  top: 20px;
+  justify-content: center;
+  align-items: flex-start;
+  
 `

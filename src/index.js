@@ -6,8 +6,8 @@ import reportWebVitals from './reportWebVitals';
 import {BrowserRouter} from 'react-router-dom'
 
 ReactDOM.render(
-  <BrowserRouter >
-    <App />
+  <BrowserRouter style={{verticalAlign: "top", display: "inline"}}>
+    <App style={{display: "inline", position: "relative", verticalAlign: "top"}}/>
   </BrowserRouter>,
   document.getElementById('root')
 );

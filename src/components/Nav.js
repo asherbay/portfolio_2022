@@ -1,5 +1,5 @@
-import {Link} from 'react-router-dom'
-import React, {useState} from 'react'
+import {Link, useLocation} from 'react-router-dom'
+import React, {useState, useEffect, } from 'react'
 import styled from 'styled-components'
 import pic from '../images/smile001.png'
 import scale from './Scale'
@@ -7,6 +7,7 @@ import {styles} from '../Styles'
 import useWindowSize from '../hooks/useWindowSize'
 
 const Nav = () => {
+    const location = useLocation()
     const [currentPage, setCurrentPage] = useState("")
     const size = useWindowSize()
     const setPage = (e) => {
@@ -14,11 +15,14 @@ const Nav = () => {
         setCurrentPage(e.target.pathname.substring(1))
     }
 
-    
+
+    useEffect(()=>{
+        console.log("location.pathname " + currentPage)
+    }, [location.pathname])
 
 
     return (
-        <NavLinks width={size.width} >
+        <NavLinks width={size.width} selPath={currentPage}>
             <br/>
             {/* <ProfPic src={pic} onClick={()=>{setCurrentPage("home")}} /> */}
             <NamePlate id="name" currentpage={currentPage} onClick={()=>{setCurrentPage("home")}} to="/">ASHER BAY</NamePlate>
@@ -55,14 +59,17 @@ const NavLink = styled(Link)`
 const NamePlate = styled(NavLink)`
         text-decoration: none;
         color: white;
-        border: 3px solid white;
+        border-width: 3px;
+        border-color: white;
+        border-style: solid;
         background-color: transparent;
         width: 356px;
         text-align: center;
         font-size: 45pt;
         padding: 4px;
-        
-
+        text-decoration: ${props => props.currentpage==="home" ? "underline" : "none"};
+        text-decoration-thickness: 3px;
+        text-underline-offset: 10px;
         &:hover {
             color: red;
         }
@@ -76,10 +83,10 @@ const NavLinks = styled.nav`
     display: flex;
     flex-direction: column;
     gap: 30px;
-    
+  
     align-items: center;
-    position: relative;
-    top: -75px;
+    margin-top: -75px;
+ 
     order: 1;
 
     &>*{
@@ -91,10 +98,11 @@ const NavLinks = styled.nav`
         }
     }
     #name{
+
         @media screen and (max-width: 1140px) {
             font-size: ${props => scale(props.width, 100, 1140, 23, 45)}pt;
         }
-        @media screen and (min-width: 1001pt) {
+        @media screen and (min-width: 1001px) {
             font-size: 45pt;
         }
     }
@@ -102,10 +110,8 @@ const NavLinks = styled.nav`
         @media screen and (max-width: 1140px) {
             font-size: ${props => scale(props.width, 100, 1140, 12, 25)}pt;
         }
-        @media screen and (min-width: 1001pt) {
+        @media screen and (min-width: 1001px) {
             font-size: 25pt;
         }
     }
-
-   
 `

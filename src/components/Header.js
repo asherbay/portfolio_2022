@@ -11,17 +11,17 @@ const Body = (props) => {
 
     useEffect(()=>{
         setElementWidth(ref.current.offsetWidth)
-       console.log(elementWidth)
+   
     }, [])
 
     useEffect(()=>{
       
-       console.log(elementWidth)
+
     }, [elementWidth])
 
     useEffect(()=>{
        setElementWidth(ref.current.offsetWidth)
-       console.log("windowSize: " + windowSize.width)
+   
     }, [windowSize])
 
 
@@ -50,7 +50,7 @@ const Banner = styled.section`
     
     padding: 30px;
     margin: 15px;
-    position: relative;
+    
     margin-top: ${props => (props.y ? props.y + "px" : "-500px")};
     
     

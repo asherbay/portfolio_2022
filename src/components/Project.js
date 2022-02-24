@@ -28,9 +28,9 @@ const Project = (props) => {
                     <a href={props.url} style={{textDecorationColor: "white", textUnderlineOffset: "5px"}}><p style={{marginTop: "0px", marginBottom: "0px", color: "white", }}>{props.name}</p></a>
                     <p style={{marginTop: "10px", }}>{props.children}</p>
                     
-                    <section style={{display: "flex", gap: "10px", alignItems: "center", marginBottom: "0px", flexDirection: (size.width>590 ? "row" : "column")}}>
-                    <p style={{ marginTop: "0px", marginBottom: "0px", position: "relative"}}>Made <br/>with:</p>
-                            {props.techTags && renderTechTags()}
+                    <section style={{display: "flex", gap: "10px", alignItems: "center", marginBottom: "0px", flexDirection: (size.width>720 ? "row" : "column")}}>
+                        <p style={{ marginTop: "0px", marginBottom: "0px", position: "relative"}}>Made <br/>with:</p>
+                        {props.techTags && renderTechTags()}
                     </section>
                 </section>
             </ProjBox>
@@ -44,7 +44,7 @@ const TechTag = styled.button`
     border: 2px solid white;
     font-family:  Bergen;
     color: white;
-    font-size: 13pt;
+    font-size: 17pt;
     padding 5px;
     background-color: transparent;
     border-radius: 10px;
@@ -58,13 +58,12 @@ const TechTag = styled.button`
 
 const ProjBox = styled.section`
     display: flex; 
-    flex-direction: ${props => (props.size.width > 1250 ? "row" : "column")};
-    
+    flex-direction: ${props => (props.size.width > 1350 ? "row" : "column")};
     gap: 20px;
- 
     p{
         font-size: 18pt;
     }
+    
 `
 
 const ProjImg = styled.img`
