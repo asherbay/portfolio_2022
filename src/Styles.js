@@ -9,4 +9,5 @@ export const styles = {
     imgWidth: 300,
     sectionWidth: 50, //vw
     bgColor: "#000000",
+    minContentWidth: 319
 }

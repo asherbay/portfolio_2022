@@ -19,7 +19,7 @@ const Sect = styled.section`
     padding: 30px;
     margin: 15px;
     color: white;
-    
+    min-width: 319px;
     margin-top: ${props => (props.y !== null ? props.y + "px" : "-500px")};
 `
 

@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import Body from '../components/Body'
 import useWindowSize from '../hooks/useWindowSize'
 import scale from './Scale'
+import {styles} from '../Styles'
 //also need to add info about tech used
 
 let size
@@ -21,7 +22,7 @@ const Project = (props) => {
     }
 
     return (
-        <Body id="boxParent" y={-15} >
+        <Body id="boxParent" y={-15} style={{minWidth: "319px"}} >
             <ProjBox size={size}>
                 <ProjImg src={props.pic} size={size} target="_blank" onClick={()=>{window.open(props.url, '_blank')}}/>
                 <section style={{display: "flex", flexDirection: "column", justifyItems: "flex-start",  position: "relative", width: "100%",}}>
@@ -60,9 +61,11 @@ const ProjBox = styled.section`
     display: flex; 
     flex-direction: ${props => (props.size.width > 1350 ? "row" : "column")};
     gap: 20px;
+    min-width: 419px;
     p{
         font-size: 20pt;
     }
+    
     
 `
 
