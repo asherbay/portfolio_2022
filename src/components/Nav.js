@@ -5,10 +5,14 @@ import pic from '../images/smile001.png'
 import scale from './Scale'
 import {styles} from '../Styles'
 import useWindowSize from '../hooks/useWindowSize'
+import githubPic from '../images/github.png'
+import linkedinPic from '../images/linkedin.png'
+
+
 
 const Nav = () => {
     const location = useLocation()
-    const [currentPage, setCurrentPage] = useState("")
+    const [currentPage, setCurrentPage] = useState(location.pathname==="/" ? "home" : location.pathname.substring(1))
     const size = useWindowSize()
     const setPage = (e) => {
         console.log(e.target.pathname.substring(1))
@@ -29,20 +33,31 @@ const Nav = () => {
             <NavLink onClick={setPage} to="/projects">projects {currentPage=="projects" ? '⦿' : '○'} </NavLink>
             <NavLink onClick={setPage} to="/resume">resume {currentPage=="resume" ? '⦿' : '○'} </NavLink>
             <NavLink onClick={setPage} to="/contact">contact {currentPage=="contact" ? '⦿' : '○'} </NavLink>
+            <section>
+                <a href="https://github.com/asherbay" target="_blank"><IconLink src={githubPic}></IconLink></a>
+                 <a href="https://www.linkedin.com/in/asherbay/" target="_blank"><IconLink src={linkedinPic}></IconLink></a>
+            </section>
         </NavLinks>
     )
 }
 export default Nav
 
+
+const IconLink = styled.img`
+    width: 70px;
+    border: 0px solid white;
+    float: right;
+    margin-left: 10px;
+    &:hover {
+        transform: scale(115%);
+        cursor: pointer;
+    }
+`
+
 const NavLink = styled(Link)`
     text-decoration: none;
     color: white;
     background-color: transparent;
-
-    
-    
-
-
     text-align: right;
     border: 3px solid white;
     padding: 4px;
@@ -50,9 +65,7 @@ const NavLink = styled(Link)`
 
     &:hover {
         color: red;
-  }
-  
-   
+    }
 `
 
 

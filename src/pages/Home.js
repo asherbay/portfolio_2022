@@ -11,7 +11,6 @@ import railsPic from '../images/rails.png'
 import sqlPic from '../images/sql.png'
 import postgresPic from '../images/postgresql.png'
 
-
 const Home = () => {
     const techTags = [
         {name: 'JS', img: jsPic},
@@ -20,19 +19,17 @@ const Home = () => {
         {name: 'React', img: reactPic},
         {name: 'Ruby', img: rubyPic},
         {name: 'Rails', img: railsPic},
-        {name: 'SQL', img: sqlPic},
         {name: 'Postgres', img: postgresPic},
+        {name: 'SQL', img: sqlPic},
     ]
     const renderTechTags = () => {
         return (
             techTags.map((t, i)=>{
                 let initOffset = 0
-                if(i===0){
-                    initOffset = 15
-                }
+                
                 return (
-                    <TechTag style={{marginLeft: initOffset + "px"}}>
-                        <img src={t.img} style={{width: "50px"}}/>
+                    <TechTag style={{marginLeft: initOffset + "px",}}>
+                        <img src={t.img} style={{width: "70px"}}/>
                         {t.name}
                     </TechTag>
                 )
@@ -45,10 +42,13 @@ const Home = () => {
         <section style={{display: 'flex', flexDirection: 'column', gap: "30px", position: "relative", }}>
             <Body y={5} >
             <ProfPic src={pic}/>
-                I'm Asher Bay, a front end React developer in Salt Lake City, Utah. I love building systems, learning new tools, and solving interesting problems with code.<br/>In 2022 I graduated from DevPoint Labs, a web development bootcamp affiliated with the University of Utah. Since then I've enjoyed continuing to learn and build.
+                I'm Asher Bay, a front end developer in Salt Lake City, Utah. I love building systems, learning new tools, and solving interesting problems with code.<br/>In 2022 I graduated from DevPoint Labs, a web development bootcamp affiliated with the University of Utah. Since then I've enjoyed continuing to learn and build.
                 <br/>
-                <section style={{display: "flex", gap: "10px", alignItems: "center", marginBottom: "0px",}}>
-                    <p style={{ marginTop: "0px", marginBottom: "0px", position: "relative"}}>Skills:</p>
+                <br/>
+                <p style={{ marginTop: "0px", marginBottom: "15px", position: "relative"}}>Skills:</p>
+                
+                <section style={{display: "flex", rowGap: "15px", columnGap: "10px", alignItems: "center", alignContent: "space-around", justifyContent: "center", marginBottom: "0px", flexWrap: "wrap", marginRight: "50", marginLeft: "50",}}>
+                    
                     {renderTechTags()}
                 </section>
             </Body>
@@ -63,6 +63,7 @@ const ProfPic = styled.img`
     border-radius: 50%;
     float: right;
     margin-left: 10px;
+
     display: inline;
     &:hover {
         cursor: pointer;
@@ -70,7 +71,7 @@ const ProfPic = styled.img`
 `
 
 const TechTag = styled.button`
-    border: 2px solid white;
+    border: 0px solid white;
     font-family:  Bergen;
     color: white;
     font-size: 17pt;
@@ -78,9 +79,14 @@ const TechTag = styled.button`
     background-color: transparent;
     border-radius: 10px;
     position: relative;
-    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
     left: -12px;
     &:hover {
+        transform: scale(115%);
         cursor: pointer;
+    
     }
 `

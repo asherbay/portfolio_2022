@@ -23,9 +23,9 @@ const Project = (props) => {
     return (
         <Body id="boxParent" y={-15} >
             <ProjBox size={size}>
-                <ProjImg src={props.pic} size={size}/>
+                <ProjImg src={props.pic} size={size} target="_blank" onClick={()=>{window.open(props.url, '_blank')}}/>
                 <section style={{display: "flex", flexDirection: "column", justifyItems: "flex-start",  position: "relative", width: "100%",}}>
-                    <a href={props.url} style={{textDecorationColor: "white", textUnderlineOffset: "5px"}}><p style={{marginTop: "0px", marginBottom: "0px", color: "white", }}>{props.name}</p></a>
+                    <a href={props.url} style={{textDecorationColor: "white", textUnderlineOffset: "5px"}} target="_blank"><p style={{marginTop: "0px", marginBottom: "0px", color: "white", }}>{props.name}</p></a>
                     <p style={{marginTop: "10px", }}>{props.children}</p>
                     
                     <section style={{display: "flex", gap: "10px", alignItems: "center", marginBottom: "0px", flexDirection: (size.width>720 ? "row" : "column")}}>
@@ -61,7 +61,7 @@ const ProjBox = styled.section`
     flex-direction: ${props => (props.size.width > 1350 ? "row" : "column")};
     gap: 20px;
     p{
-        font-size: 18pt;
+        font-size: 20pt;
     }
     
 `
@@ -70,5 +70,7 @@ const ProjImg = styled.img`
     
     width: 300px;
     align-self: center;
-
+    &:hover {
+        cursor: pointer;
+    }
 `

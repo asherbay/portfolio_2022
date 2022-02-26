@@ -68,7 +68,7 @@ export default App;
 
 const Content = styled.div`
   transform-origin: top center;
-  transform: scale(80%);  
+  transform: scale(72%);  
   background: ${styles.bgColor}; 
   vertical-align: super;
   display: flex;  
