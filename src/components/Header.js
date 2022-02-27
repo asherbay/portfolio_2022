@@ -37,7 +37,7 @@ const Banner = styled.section`
     
     color: white;
     border: 3px solid white;
-    width: ${styles.sectionWidth}vw;
+    width: ${window.innerWidth<900 ? 80 : styles.sectionWidth}vw;
     text-align: center;
 
     @media screen and (max-width: 1000px) {
