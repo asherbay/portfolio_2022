@@ -11,7 +11,7 @@ import React, {useState, useEffect, useRef} from 'react'
 import scale from './components/Scale'
 import styled from 'styled-components'
 import {styles} from './Styles'
-
+import {isMobile} from 'react-device-detect'
 
 import useWindowSize from './hooks/useWindowSize'
 
@@ -68,7 +68,7 @@ export default App;
 
 const Content = styled.div`
   transform-origin: top center;
-  transform: scale(${window.innerWidth<900 ? 5 : 64}%);  
+  transform: scale(${isMobile ? 5 : 64}%);  
   background: ${styles.bgColor}; 
   vertical-align: super;
   display: flex;  
