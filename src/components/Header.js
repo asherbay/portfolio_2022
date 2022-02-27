@@ -40,10 +40,10 @@ const Banner = styled.section`
     width: ${window.innerWidth<900 ? 80 : styles.sectionWidth}vw;
     text-align: center;
 
-    @media screen and (max-width: 1000px) {
+    @media screen and (max-width: 800px) {
         font-size:  ${props => (scale(props.width, 100, 570, 12, styles.fontSizes.header))}pt;
     }
-    @media screen and (min-width: 1001px) {
+    @media screen and (min-width: 801px) {
         font-size:  ${styles.fontSizes.header}pt;
     }
 

@@ -103,27 +103,27 @@ const NavLinks = styled.nav`
     order: 1;
 
     &>*{
-        @media screen and (max-width: 1000px) {
-            width: ${props => scale(props.width, 100, 1000, 50, 350)}px;
+        @media screen and (max-width: 800px) {
+            width: ${props => scale(props.width, 100, 800, 50, 350)}px;
         }
-        @media screen and (min-width: 1001px) {
+        @media screen and (min-width: 801px) {
             width: 350px;
         }
     }
     #name{
 
-        @media screen and (max-width: 1140px) {
+        @media screen and (max-width: 800px) {
             font-size: ${props => scale(props.width, 100, 1140, 23, 45)}pt;
         }
-        @media screen and (min-width: 1001px) {
+        @media screen and (min-width: 801px) {
             font-size: 45pt;
         }
     }
     &>:not(NamePlate){
-        @media screen and (max-width: 1140px) {
+        @media screen and (max-width: 800px) {
             font-size: ${props => scale(props.width, 100, 1140, 12, 25)}pt;
         }
-        @media screen and (min-width: 1001px) {
+        @media screen and (min-width: 801px) {
             font-size: 25pt;
         }
     }

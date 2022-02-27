@@ -22,8 +22,8 @@ const Project = (props) => {
     }
 
     return (
-        <Body id="boxParent" y={-15} style={{minWidth: "319px"}} >
-            <ProjBox size={size}>
+        <Body id="boxParent" y={-15}  >
+            <ProjBox size={size} >
                 <ProjImg src={props.pic} size={size} target="_blank" onClick={()=>{window.open(props.url, '_blank')}}/>
                 <section style={{display: "flex", flexDirection: "column", justifyItems: "flex-start",  position: "relative", width: "100%",}}>
                     <a href={props.url} style={{textDecorationColor: "white", textUnderlineOffset: "5px"}} target="_blank"><p style={{marginTop: "0px", marginBottom: "0px", color: "white", }}>{props.name}</p></a>
