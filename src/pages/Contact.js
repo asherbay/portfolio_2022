@@ -49,11 +49,14 @@ const Contact = () => {
     return (
         <section style={{display: 'flex', flexDirection: 'column', gap: "30px", position: "relative", }}>
         <Header y={5} >CONTACT</Header>
+            <Body y={-15} >
+                <p style={{marginTop: "0px",}}>Email: asherbay@gmail.com</p>
+                <p style={{marginBottom: "0px", }}>Phone: 801-822-9437</p>
+            </Body>
             <Body y={-15}>
                 {/* <p>Feel free to reach out via email, phone, or by sending a message below.</p> */}
                 {/* <p>Get in touch!</p>  */}
-                <p style={{marginTop: "0px"}}>asherbay@gmail.com</p>
-                <p>801-822-9437</p>
+                
                 <form ref={form}>
                     <Field>Name: <Input name={"from_name"} placeholder={status==="not ready" ? "Name required" : ""} onChange={(e)=>{setMessName(e.target.value)}}/></Field>
 
@@ -75,9 +78,9 @@ const Input = styled.input`
     outline-width: 0; 
     font-size: ${styles.fontSizes.body}pt;
     width: 100%;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    margin-bottom: 30px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin-bottom: 20px;
     text-indent: 5pt;
     font-family: Bergen;
 `
@@ -88,7 +91,11 @@ const BigInput = styled.textarea`
     outline-width: 0; 
     font-size: ${styles.fontSizes.body}pt;
     width: 100%;
-    height: 300px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    
+    text-indent: 5pt;
+    height: 150px;
     resize: none;
     font-family: Bergen;
 `
@@ -96,7 +103,7 @@ const BigInput = styled.textarea`
 const Field = styled.section`
     display: flex;
     flex-direction: column;
-    gap: 15px;   
+    gap: 10px;   
     position: relative;
     left: -5px;
     

@@ -15,7 +15,7 @@ export default Body
 const Sect = styled.section`
     background-color: transparent;
     border: 3px solid white;
-    width: ${styles.sectionWidth}vw;
+    width: ${window.innerWidth<900 ? 80 : styles.sectionWidth}vw;
     padding: 30px;
     margin: 15px;
     color: white;
