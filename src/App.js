@@ -30,7 +30,7 @@ function App() {
   }, [])
 
   useEffect(()=>{
-    console.log("size changed")
+    // console.log("size changed")
     setPageHeight(Math.max(document.getElementById("root").firstChild.firstChild.scrollHeight, window.innerHeight))
   }, [document.body.scrollHeight, window.innerHeight, location.pathname])
 
@@ -39,8 +39,8 @@ function App() {
       if(ref.current){
         setElementWidth(ref.current.offsetWidth)
       }
-      console.log("windowSize: " + window.innerHeight)
-      console.log("docSize: " + document.body.scrollHeight)
+      // console.log("windowSize: " + window.innerHeight)
+      // console.log("docSize: " + document.body.scrollHeight)
   }, [windowSize])
 
 

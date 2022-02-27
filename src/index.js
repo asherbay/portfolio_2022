@@ -4,10 +4,12 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {BrowserRouter} from 'react-router-dom'
-
+import StyleProvider from './providers/StyleProvider'
 ReactDOM.render(
   <BrowserRouter style={{verticalAlign: "top", display: "inline"}}>
-    <App style={{display: "inline", position: "relative", verticalAlign: "top"}}/>
+    <StyleProvider>
+      <App style={{display: "inline", position: "relative", verticalAlign: "top"}}/>
+    </StyleProvider>
   </BrowserRouter>,
   document.getElementById('root')
 );

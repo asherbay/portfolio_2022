@@ -1,5 +1,5 @@
 import {Link, useLocation} from 'react-router-dom'
-import React, {useState, useEffect, } from 'react'
+import React, {useState, useEffect, useContext} from 'react'
 import styled from 'styled-components'
 import pic from '../images/smile001.png'
 import scale from './Scale'
@@ -7,10 +7,13 @@ import {styles} from '../Styles'
 import useWindowSize from '../hooks/useWindowSize'
 import githubPic from '../images/github.png'
 import linkedinPic from '../images/linkedin.png'
+import {StyleContext} from '../providers/StyleProvider'
 
+    
 
 
 const Nav = () => {
+    const {styles, isMobile} = useContext(StyleContext)
     const location = useLocation()
     const [currentPage, setCurrentPage] = useState(location.pathname==="/" ? "home" : location.pathname.substring(1))
     const size = useWindowSize()
@@ -29,8 +32,8 @@ const Nav = () => {
         <NavLinks width={size.width} selPath={currentPage}>
             <br/>
             {/* <ProfPic src={pic} onClick={()=>{setCurrentPage("home")}} /> */}
-            <NamePlate id="name" currentpage={currentPage} onClick={()=>{setCurrentPage("home")}} to="/">ASHER BAY</NamePlate>
-            <NavLink onClick={setPage} to="/projects">projects {currentPage=="projects" ? '⦿' : '○'} </NavLink>
+            <NamePlate id="name" currentpage={currentPage} onClick={()=>{setCurrentPage("home")}} to="/" >ASHER BAY</NamePlate>
+            <NavLink onClick={setPage} to="/projects"  >projects {currentPage=="projects" ? '⦿' : '○'} </NavLink>
             <NavLink onClick={setPage} to="/resume">resume {currentPage=="resume" ? '⦿' : '○'} </NavLink>
             <NavLink onClick={setPage} to="/contact">contact {currentPage=="contact" ? '⦿' : '○'} </NavLink>
             <section>
@@ -78,7 +81,7 @@ const NamePlate = styled(NavLink)`
         background-color: transparent;
         width: 356px;
         text-align: center;
-        font-size: 45pt;
+        
         padding: 4px;
         text-decoration: ${props => props.currentpage==="home" ? "underline" : "none"};
         text-decoration-thickness: 3px;

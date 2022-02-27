@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import styled from 'styled-components'
 import Body from '../components/Body'
 import pic from '../images/smile001.png'
@@ -10,8 +10,9 @@ import rubyPic from '../images/ruby.png'
 import railsPic from '../images/rails.png'
 import sqlPic from '../images/sql.png'
 import postgresPic from '../images/postgresql.png'
-
+import {StyleContext} from '../providers/StyleProvider'
 const Home = () => {
+    const {styles} = useContext(StyleContext)
     const techTags = [
         {name: 'JS', img: jsPic},
         {name: 'HTML', img: htmlPic},
@@ -28,8 +29,8 @@ const Home = () => {
                 let initOffset = 0
                 
                 return (
-                    <TechTag style={{marginLeft: initOffset + "px",}}>
-                        <img src={t.img} style={{width: "70px"}}/>
+                    <TechTag style={{marginLeft: initOffset + "px", fontSize: styles.fontSizes.tag}}>
+                        <img src={t.img} style={{width: styles.tagImgWidth + "px"}}/>
                         {t.name}
                     </TechTag>
                 )
@@ -41,7 +42,7 @@ const Home = () => {
     return (
         <section style={{display: 'flex', flexDirection: 'column', gap: "30px", position: "relative", }}>
             <Body y={5} >
-            <ProfPic src={pic}/>
+            <ProfPic src={pic} style={{width: styles.imgWidth}}/>
                 I'm Asher Bay, a front end developer in Salt Lake City, Utah. I love building systems, learning new tools, and solving interesting problems with code.<br/>In 2022 I graduated from DevPoint Labs, a web development bootcamp affiliated with the University of Utah. Since then I've enjoyed continuing to learn and build.
                 <br/>
                 <br/>
@@ -59,7 +60,7 @@ const Home = () => {
 export default Home
 
 const ProfPic = styled.img`
-    width: 300px;
+    
     border-radius: 50%;
     float: right;
     margin-left: 10px;
@@ -74,7 +75,6 @@ const TechTag = styled.button`
     border: 0px solid white;
     font-family:  Bergen;
     color: white;
-    font-size: 17pt;
     padding 5px;
     background-color: transparent;
     border-radius: 10px;

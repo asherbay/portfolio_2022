@@ -1,9 +1,11 @@
-import React, {useState, useEffect, useRef} from 'react'
+import React, {useState, useEffect, useRef, useContext} from 'react'
 import styled from 'styled-components'
 import scale from './Scale'
 import useWindowSize from '../hooks/useWindowSize'
-import {styles} from '../Styles'
-const Body = (props) => {
+// import {styles} from '../Styles'
+import {StyleContext} from '../providers/StyleProvider'
+const Header = (props) => {
+    const {styles, isMobile} = useContext(StyleContext)
     const windowSize = useWindowSize()
     const ref = useRef(null)
     const [elementWidth, setElementWidth] = useState(ref.current ? ref.current.offsetWidth : null)
@@ -26,31 +28,28 @@ const Body = (props) => {
 
 
     return (
-        <Banner ref={ref} y={props.y} width={elementWidth}>
+        <Banner ref={ref} y={props.y} width={elementWidth} 
+            style={{
+                width: styles.sectionWidth + "vw", 
+                minWidth: styles.minContentWidth + "px", 
+                fontSize: (isMobile ? styles.fontSizes.header : windowSize.width < 1000 ? scale(elementWidth, 100, 570, 12, styles.fontSizes.header) : styles.fontSizes.header),
+            }}>
             {props.children}
         </Banner>
     )
 }
-export default Body
+export default Header
 
 const Banner = styled.section`
     
     color: white;
     border: 3px solid white;
-    width: ${styles.sectionWidth}vw;
     text-align: center;
 
-    @media screen and (max-width: 1000px) {
-        font-size:  ${props => (scale(props.width, 100, 570, 12, styles.fontSizes.header))}pt;
-    }
-    @media screen and (min-width: 1001px) {
-        font-size:  ${styles.fontSizes.header}pt;
-    }
 
     
     padding: 30px;
     margin: 15px;
-    min-width: 319px;
     margin-top: ${props => (props.y ? props.y + "px" : "-500px")};
     
     
