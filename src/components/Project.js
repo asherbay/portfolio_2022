@@ -31,7 +31,7 @@ const Project = (props) => {
                     <a href={props.url} style={{textDecorationColor: "white", textUnderlineOffset: "5px"}} target="_blank"><p style={{marginTop: "0px", marginBottom: "0px", color: "white", }}>{props.name}</p></a>
                     <p style={{marginTop: "10px", }}>{props.children}</p>
                     
-                    <section style={{display: "flex", gap: "10px", alignItems: "center", marginBottom: "0px", flexDirection: (size.width>(isMobile ? 600 : 860) ?  "row" : "column")}}>
+                    <section style={{display: "flex", gap: "10px", alignItems: "center", marginBottom: "0px", flexDirection: (size.width>(window.innerWidth<900 ? 475 : 720) ? "row" : "column")}}>
                         <p style={{ marginTop: "0px", marginBottom: "0px", position: "relative"}}>Made <br/>with:</p>
                         {props.techTags && renderTechTags()}
                     </section>

@@ -44,6 +44,7 @@ const Banner = styled.section`
     
     color: white;
     border: 3px solid white;
+    width: ${window.innerWidth<900 ? 80 : styles.sectionWidth}vw;
     text-align: center;
 
 
