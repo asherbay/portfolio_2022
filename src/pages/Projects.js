@@ -18,7 +18,7 @@ const Projects = () => {
                 A full stack audio journal app featuring user authentication, usage analytics, and cloud data storage/retrieval.
             </Project>
 
-            <Project y={-15} pic={portfolioPic}  name="Portfolio" url="https://vocaljournal.herokuapp.com/" techTags={['React', 'P5.js']}>
+            <Project y={-15} pic={portfolioPic}  name="Portfolio" url="https://asherbay.dev/" techTags={['React', 'P5.js']}>
                 A custom portfolio website built in React featuring responsive design and styled components.
             </Project>
                 
