@@ -7,7 +7,8 @@ import {styles} from '../Styles'
 import useWindowSize from '../hooks/useWindowSize'
 import githubPic from '../images/github.png'
 import linkedinPic from '../images/linkedin.png'
-
+import resumeIcon from '../images/resume.png'
+import resume from '../images/resume.pdf'
 
 
 const Nav = () => {
@@ -31,11 +32,13 @@ const Nav = () => {
             {/* <ProfPic src={pic} onClick={()=>{setCurrentPage("home")}} /> */}
             <NamePlate id="name" currentpage={currentPage} onClick={()=>{setCurrentPage("home")}} to="/">ASHER BAY</NamePlate>
             <NavLink onClick={setPage} to="/projects">projects {currentPage=="projects" ? '⦿' : '○'} </NavLink>
-            <NavLink onClick={setPage} to="/resume">resume {currentPage=="resume" ? '⦿' : '○'} </NavLink>
+            {/* <NavLink onClick={setPage} to="/resume">resume {currentPage=="resume" ? '⦿' : '○'} </NavLink> */}
             <NavLink onClick={setPage} to="/contact">contact {currentPage=="contact" ? '⦿' : '○'} </NavLink>
             <section>
+                
                 <a href="https://github.com/asherbay" target="_blank"><IconLink src={githubPic}></IconLink></a>
-                 <a href="https://www.linkedin.com/in/asherbay/" target="_blank"><IconLink src={linkedinPic}></IconLink></a>
+                <a href="https://www.linkedin.com/in/asherbay/" target="_blank"><IconLink src={linkedinPic}></IconLink></a>
+                 <a><IconLink src={resumeIcon} onClick={()=>{window.open(resume)}}></IconLink></a>
             </section>
         </NavLinks>
     )
