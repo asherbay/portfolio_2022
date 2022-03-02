@@ -7,7 +7,6 @@ import {BrowserRouter} from 'react-router-dom'
 import Background from './components/Background'
 ReactDOM.render(
   <BrowserRouter style={{verticalAlign: "top", display: "inline"}}>
-    
     <App style={{display: "inline", position: "relative", verticalAlign: "top"}}/>
   </BrowserRouter>,
   document.getElementById('root')

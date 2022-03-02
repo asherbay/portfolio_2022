@@ -70,6 +70,7 @@ export default App;
 const Content = styled.div`
   transform-origin: top center;
   transform: scale(${props => props.isMobile ? 5 : 64}%);  
+  ${props => props.isMobile ? `width: ${window.innerWidth * 0.8};` : '' }
   background: ${styles.bgColor}; 
   vertical-align: super;
   display: flex;  
