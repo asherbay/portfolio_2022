@@ -61,7 +61,7 @@ const ProjBox = styled.section`
     display: flex; 
     flex-direction: ${props => (props.size.width > 1150 ? "row" : "column")};
     gap: 20px;
-    min-width: 419px;
+    min-width: ${styles.minContentWidth};
     p{
         font-size: 20pt;
     }
@@ -71,7 +71,7 @@ const ProjBox = styled.section`
 
 const ProjImg = styled.img`
     
-    width: 300px;
+    width: ${styles.imgWidth}px;
     align-self: center;
     &:hover {
         cursor: pointer;

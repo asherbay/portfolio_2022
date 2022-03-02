@@ -10,6 +10,7 @@ import rubyPic from '../images/ruby.png'
 import railsPic from '../images/rails.png'
 import sqlPic from '../images/sql.png'
 import postgresPic from '../images/postgresql.png'
+import {styles} from '../Styles'
 
 const Home = () => {
     const techTags = [
@@ -39,7 +40,7 @@ const Home = () => {
     }
 
     return (
-        <section style={{display: 'flex', flexDirection: 'column', gap: "30px", position: "relative", }}>
+        <section style={{display: 'flex', flexDirection: 'column', gap: "30px", }}>
             <Body y={5} >
             <ProfPic src={pic}/>
                 I'm Asher Bay, a full stack web developer in Salt Lake City, Utah. I love building systems, learning new tools, and solving interesting problems with code.<br/>In 2022 I graduated from DevPoint Labs, a web development bootcamp affiliated with the University of Utah. Since then I've enjoyed continuing to learn and build.
@@ -59,7 +60,7 @@ const Home = () => {
 export default Home
 
 const ProfPic = styled.img`
-    width: 300px;
+    width: ${styles.imgWidth}px;
     border-radius: 50%;
     float: right;
     margin-left: 10px;
