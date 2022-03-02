@@ -13,6 +13,7 @@ import styled from 'styled-components'
 import {styles} from './Styles'
 import {isMobile} from 'react-device-detect'
 
+
 import useWindowSize from './hooks/useWindowSize'
 
 function App() {
@@ -46,7 +47,7 @@ function App() {
 
 
   return (
-    <div id="mainContainer" style={{background: styles.bgColor,  margin: "auto", width: "100%", height: pageHeight}}>
+    <div id="mainContainer" style={{background: (isMobile ? "gray" : styles.bgColor),  margin: "auto", width: "100%", height: pageHeight}}>
       <Content ref={ref} >
         <Routes >
           <Route path='/' element={<Home/>}/>
