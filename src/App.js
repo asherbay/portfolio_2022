@@ -47,7 +47,7 @@ function App() {
 
 
   return (
-    <div id="mainContainer" style={{background: styles.bgColor,  margin: "auto", width: "100%", height: pageHeight}}>
+    <div id="mainContainer" style={{background: styles.bgColor, width: "100%", height: pageHeight}}>
       <Content ref={ref} isMobile={isMobile}>
         <Routes >
           <Route path='/' element={<Home/>}/>
@@ -70,9 +70,9 @@ export default App;
 const Content = styled.div`
   transform-origin: top center;
   transform: scale(${props => props.isMobile ? 5 : 64}%);  
-  ${props => props.isMobile ? `width: ${window.innerWidth * 0.8};` : '' }
+
   background: ${styles.bgColor}; 
-  vertical-align: super;
+
   display: flex;  
   position: relative;
   top: 20px;

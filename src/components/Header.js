@@ -50,7 +50,7 @@ const Banner = styled.section`
     
     padding: 30px;
     margin: 15px;
-    min-width: 319px;
+    min-width: ${styles.minContentWidth};
     margin-top: ${props => (props.y ? props.y + "px" : "-500px")};
     
     
