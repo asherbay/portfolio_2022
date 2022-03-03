@@ -71,8 +71,8 @@ export default App;
 
 const Content = styled.div`
   transform-origin: top center;
-  transform: scale(${props => props.isMobile ? 5 : 64}%);  
-
+  transform: scale(${styles.contentScale}%);  
+  -webkit-transform: scale(${styles.contentScale}%); 
   background: ${styles.bgColor}; 
 
   display: flex;  
