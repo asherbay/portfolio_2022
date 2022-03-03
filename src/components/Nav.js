@@ -83,7 +83,9 @@ const NamePlate = styled(NavLink)`
         width: 100%;
         text-align: center;
         font-size: ${styles.fontSizes.namePlate}pt;
-        padding: 6px;
+        padding: 4px;
+        padding-left: 6px;
+        padding-right: 6px;
         text-decoration: ${props => props.currentpage==="home" ? "underline" : "none"};
         text-decoration-thickness: 3px;
         text-underline-offset: 10px;
@@ -108,10 +110,10 @@ const NavLinks = styled.nav`
 
     &>*{
         @media screen and (max-width: 800px) {
-            width: ${props => scale(props.width, 100, 800, 50, 350)}px;
+            width: ${props => scale(props.width, 100, 800, 50, styles.navWidth)}px;
         }
         @media screen and (min-width: 801px) {
-            width: 350px;
+            width: ${styles.navWidth}px;
         }
     }
     #name{
@@ -122,7 +124,7 @@ const NavLinks = styled.nav`
         }
         @media screen and (min-width: 801px) {
             font-size: ${styles.fontSizes.namePlate}pt;
-            width: 350px;
+            width: ${styles.navWidth}px;
         }
     }
     &>:not(NamePlate){

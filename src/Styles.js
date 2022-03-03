@@ -11,5 +11,6 @@ export const styles = {
     sectionWidth: 60, //vw
     bgColor: "#000000",
     minContentWidth: (isMobile ? 0 : 319),
-    contentScale: (isMobile ? 5 : 64)
+    contentScale: (isMobile ? 5 : 64),
+    navWidth: (isMobile ? 116 : 350)
 }
