@@ -45,7 +45,7 @@ const TechTag = styled.button`
     border: 2px solid white;
     font-family:  Bergen;
     color: white;
-    font-size: 17pt;
+    font-size: ${styles.fontSizes.tag}pt;
     padding 5px;
     background-color: transparent;
     border-radius: 10px;
@@ -63,7 +63,7 @@ const ProjBox = styled.section`
     gap: 20px;
     min-width: ${styles.minContentWidth};
     p{
-        font-size: 20pt;
+        font-size: ${styles.fontSizes.project}pt;
     }
     
     

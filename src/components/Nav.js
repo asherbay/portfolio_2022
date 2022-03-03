@@ -34,6 +34,7 @@ const Nav = () => {
             <NavLink onClick={setPage} to="/projects">projects {currentPage=="projects" ? '⦿' : '○'} </NavLink>
             {/* <NavLink onClick={setPage} to="/resume">resume {currentPage=="resume" ? '⦿' : '○'} </NavLink> */}
             <NavLink onClick={setPage} to="/contact">contact {currentPage=="contact" ? '⦿' : '○'} </NavLink>
+            {/* <Link to="/backgroundtest">BG</Link> */}
             <section>
                 
                 <a href="https://github.com/asherbay" target="_blank"><IconLink src={githubPic}></IconLink></a>
@@ -79,10 +80,10 @@ const NamePlate = styled(NavLink)`
         border-color: white;
         border-style: solid;
         background-color: transparent;
-        width: 356px;
+        width: 100%;
         text-align: center;
-        font-size: 45pt;
-        padding: 4px;
+        font-size: ${styles.fontSizes.namePlate}pt;
+        padding: 6px;
         text-decoration: ${props => props.currentpage==="home" ? "underline" : "none"};
         text-decoration-thickness: 3px;
         text-underline-offset: 10px;
@@ -116,10 +117,12 @@ const NavLinks = styled.nav`
     #name{
 
         @media screen and (max-width: 800px) {
-            font-size: ${props => scale(props.width, 100, 1140, 23, 45)}pt;
+            font-size: ${props => scale(props.width, 100, 1140, styles.fontSizes.namePlate/2, styles.fontSizes.namePlate)}pt;
+            width: ${props => scale(props.width, 100, 800, 50, 350)}px;
         }
         @media screen and (min-width: 801px) {
-            font-size: 45pt;
+            font-size: ${styles.fontSizes.namePlate}pt;
+            width: 350px;
         }
     }
     &>:not(NamePlate){
@@ -127,7 +130,7 @@ const NavLinks = styled.nav`
             font-size: ${props => scale(props.width, 100, 1140, 12, 25)}pt;
         }
         @media screen and (min-width: 801px) {
-            font-size: 25pt;
+            font-size: ${styles.fontSizes.body}pt;
         }
     }
 `

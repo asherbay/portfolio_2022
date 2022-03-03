@@ -1,10 +1,11 @@
 import {isMobile} from 'react-device-detect'
 export const styles = {
     fontSizes: {
-        header: 66,
-        body: 25,
-        namePlate: 45,
-        tag: 13,
+        header: (isMobile ? 22 : 66),
+        body: (isMobile ? 8 : 25),
+        namePlate: (isMobile ? 15 : 45),
+        project: (isMobile ? 7 : 20),
+        tag: (isMobile ? 6 : 17),
     },
     imgWidth: (isMobile ? 100 : 300),
     sectionWidth: 60, //vw
