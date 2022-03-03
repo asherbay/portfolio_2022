@@ -10,5 +10,6 @@ export const styles = {
     imgWidth: (isMobile ? 100 : 300),
     sectionWidth: 60, //vw
     bgColor: "#000000",
-    minContentWidth: (isMobile ? 0 : 319)
+    minContentWidth: (isMobile ? 0 : 319),
+    contentScale: (isMobile ? 5 : 64)
 }
