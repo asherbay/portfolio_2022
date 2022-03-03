@@ -11,6 +11,7 @@ import railsPic from '../images/rails.png'
 import sqlPic from '../images/sql.png'
 import postgresPic from '../images/postgresql.png'
 import {styles} from '../Styles'
+import {Link} from 'react-router-dom'
 
 const Home = () => {
     const techTags = [
@@ -42,6 +43,7 @@ const Home = () => {
     return (
         <section style={{display: 'flex', flexDirection: 'column', gap: "30px", }}>
             <Body y={5} >
+            
             <ProfPic src={pic}/>
                 I'm Asher Bay, a full stack web developer in Salt Lake City, Utah. I love building systems, learning new tools, and solving interesting problems with code.<br/>In 2022 I graduated from DevPoint Labs, a web development bootcamp affiliated with the University of Utah. Since then I've enjoyed continuing to learn and build.
                 <br/>
@@ -75,7 +77,7 @@ const TechTag = styled.button`
     border: 0px solid white;
     font-family:  Bergen;
     color: white;
-    font-size: 17pt;
+    font-size: ${styles.fontSizes.tag}pt;
     padding 5px;
     background-color: transparent;
     border-radius: 10px;
