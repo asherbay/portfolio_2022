@@ -13,6 +13,7 @@ import styled from 'styled-components'
 import {styles} from './Styles'
 import {isMobile} from 'react-device-detect'
 
+import Background from './components/Background'
 
 import useWindowSize from './hooks/useWindowSize'
 
@@ -54,6 +55,7 @@ function App() {
           <Route path='/projects' element={<Projects/>}/>
           <Route path='/resume' element={<Resume/>}/>
           <Route path='/contact' element={<Contact/>}/>
+          <Route path='/backgroundtest' element={<Background/>}/>
         </Routes>
         <Nav/>
       </Content>
