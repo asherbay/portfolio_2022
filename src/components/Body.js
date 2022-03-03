@@ -16,6 +16,7 @@ const Sect = styled.section`
     background-color: transparent;
     border: 3px solid white;
     width: ${styles.sectionWidth}vw;
+    font-size: ${styles.fontSizes.body}pt;
     padding: 30px;
     margin: 15px;
     color: white;
