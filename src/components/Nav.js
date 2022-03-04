@@ -61,7 +61,7 @@ const IconLink = styled.img`
 const NavLink = styled(Link)`
     text-decoration: none;
     color: white;
-    background-color: transparent;
+    background-color: ${styles.bgColor};
     text-align: right;
     border: 3px solid white;
     padding: 4px;
@@ -79,7 +79,7 @@ const NamePlate = styled(NavLink)`
         border-width: 3px;
         border-color: white;
         border-style: solid;
-        background-color: transparent;
+        background: ${styles.bgColor};
         width: 100%;
         text-align: center;
         font-size: ${styles.fontSizes.namePlate}pt;
