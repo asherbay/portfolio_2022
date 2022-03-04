@@ -63,7 +63,7 @@ const NavLink = styled(Link)`
     color: white;
     background-color: ${styles.bgColor};
     text-align: right;
-    border: 3px solid white;
+    border: ${styles.borderWidth}px solid white;
     padding: 4px;
     padding-right: 10px;
 
@@ -76,7 +76,7 @@ const NavLink = styled(Link)`
 const NamePlate = styled(NavLink)`
         text-decoration: none;
         color: white;
-        border-width: 3px;
+        border-width: ${styles.borderWidth}px;
         border-color: white;
         border-style: solid;
         background: ${styles.bgColor};
