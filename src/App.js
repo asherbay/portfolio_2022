@@ -27,6 +27,7 @@ function App() {
   
 
   useEffect(()=>{
+    console.log("App component mounted")
     if(ref.current){
       setElementWidth(ref.current.offsetWidth)
     }

@@ -12,5 +12,6 @@ export const styles = {
     bgColor: "#000000",
     minContentWidth: (isMobile ? 0 : 319),
     contentScale: (isMobile ? 5 : 64),
-    navWidth: (isMobile ? 116 : 350)
+    navWidth: (isMobile ? 116 : 350),
+    borderWidth: 0.,
 }

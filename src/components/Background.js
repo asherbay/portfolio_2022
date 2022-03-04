@@ -1,23 +1,23 @@
 import { ReactP5Wrapper } from "react-p5-wrapper";
 import {Vector} from 'p5'
+import {useEffect} from 'react'
 const Background = () => {
+
+    useEffect(()=>{
+        console.log("Bg component mounted")
+    }, [])
+
     const frameRate = 15
+    let canvas = null
+
+
     const sketch = (p5) =>{
         
-        p5.setup = () => {
-            console.log("p5 setup")
-            p5.frameRate(frameRate)
-            let canvas = p5.createCanvas(p5.windowWidth, p5.windowHeight)
-            // canvas.parent(props.container)
-            canvas.position(0, 0)
-            canvas.style('z-index', '0')
-            return canvas
-        }
-        p5.draw = () => {
-            p5.noStroke()
-            p5.background(p5.color(0, 0, 0, 255)) 
-            // console.log("b " + b.length)
-            p5.echo(b, b2, [p5.windowWidth/2, p5.windowHeight/2], 500, 60, p5.color(10, 3, 255, 20), p5.color(100, 3, 25, 0), 0.5, 20)
+        class Blob {
+            constructor(position, id) {
+
+            }
+
         }
 
         p5.newBlob = (smoothness, wobbliness) =>{
@@ -34,6 +34,30 @@ const Background = () => {
             }
             return blob
         }
+        let b = p5.newBlob(24, Math.floor(Math.random() * 3)+1)
+        let b2 = p5.newBlob(24, Math.floor(Math.random() * 3)+1)
+
+        p5.setup = () => {
+            console.log("p5 setup")
+            p5.frameRate(frameRate)
+            if(!canvas){
+                canvas = p5.createCanvas(p5.windowWidth, p5.windowHeight)
+            // canvas.parent(props.container)
+            canvas.position(0, 0)
+            canvas.style('z-index', '0')
+            canvas.style('position', 'fixed')
+            return canvas
+            }
+            
+        }
+        p5.draw = () => {
+            p5.noStroke()
+            p5.background(p5.color(0, 0, 0, 255)) 
+            // console.log("b " + b.length)
+            p5.echo(b, b2, [p5.windowWidth/2, p5.windowHeight/2], 700, 200, p5.color(10, 3, 255, 5), p5.color(255, 255, 255, 0), 0.5, 50)
+        }
+
+        
 
         p5.drawBlob = (blob, position, color, mag) => {
             p5.fill(color)
@@ -60,8 +84,7 @@ const Background = () => {
             }
         }
 
-        let b = p5.newBlob(24, Math.floor(Math.random() * 3))
-        let b2 = p5.newBlob(24, Math.floor(Math.random() * 3))
+        
     }
     return (
         <ReactP5Wrapper sketch={sketch}/>
