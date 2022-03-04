@@ -22,6 +22,7 @@ function App() {
   const [pageHeight, setPageHeight] = useState(null)
   const windowSize = useWindowSize()
   const ref = useRef(null)
+  const bgContainer = useRef(null)
   const [elementWidth, setElementWidth] = useState(ref.current ? ref.current.offsetWidth : null)
   
 
@@ -48,7 +49,8 @@ function App() {
 
 
   return (
-    <div id="mainContainer" style={{background: styles.bgColor, width: "100%", height: pageHeight}}>
+    <div id="mainContainer" ref={bgContainer} style={{background: styles.bgColor, width: "100%", height: pageHeight, }}>
+    
       <Content ref={ref} isMobile={isMobile}>
         <Routes >
           <Route path='/' element={<Home/>}/>
@@ -59,6 +61,7 @@ function App() {
         </Routes>
         <Nav/>
       </Content>
+      <Background/>
     </div>
   );
 }
@@ -73,7 +76,7 @@ const Content = styled.div`
   transform-origin: top center;
   transform: scale(${styles.contentScale}%);  
   -webkit-transform: scale(${styles.contentScale}%); 
-  background: ${styles.bgColor}; 
+   
 
   display: flex;  
   position: relative;
@@ -82,4 +85,5 @@ const Content = styled.div`
   justify-content: center;
   align-items: flex-start;
   
+  z-index: 1;
 `
