@@ -32,14 +32,14 @@ const Nav = () => {
             {/* <ProfPic src={pic} onClick={()=>{setCurrentPage("home")}} /> */}
             <NamePlate id="name" currentpage={currentPage} onClick={()=>{setCurrentPage("home")}} to="/">ASHER BAY</NamePlate>
             <NavLink onClick={setPage} to="/projects">projects {currentPage=="projects" ? '⦿' : '○'} </NavLink>
-            {/* <NavLink onClick={setPage} to="/resume">resume {currentPage=="resume" ? '⦿' : '○'} </NavLink> */}
             <NavLink onClick={setPage} to="/contact">contact {currentPage=="contact" ? '⦿' : '○'} </NavLink>
+            <NavLink onClick={()=>{window.open(resume)}} to={location.pathname}>resume {currentPage=="resume" ? '⦿' : '○'} </NavLink>
             {/* <Link to="/backgroundtest">BG</Link> */}
             <section>
                 
                 <a href="https://github.com/asherbay" target="_blank"><IconLink src={githubPic}></IconLink></a>
                 <a href="https://www.linkedin.com/in/asherbay/" target="_blank"><IconLink src={linkedinPic}></IconLink></a>
-                 <a><IconLink src={resumeIcon} onClick={()=>{window.open(resume)}}></IconLink></a>
+                 {/* <a><IconLink src={resumeIcon} onClick={()=>{window.open(resume)}}></IconLink></a> */}
             </section>
         </NavLinks>
     )
