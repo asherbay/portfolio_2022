@@ -61,9 +61,9 @@ const IconLink = styled.img`
 const NavLink = styled(Link)`
     text-decoration: none;
     color: white;
-    background-color: transparent;
+    background-color: ${styles.bgColor};
     text-align: right;
-    border: 3px solid white;
+    border: ${styles.borderWidth}px solid white;
     padding: 4px;
     padding-right: 10px;
 
@@ -76,10 +76,10 @@ const NavLink = styled(Link)`
 const NamePlate = styled(NavLink)`
         text-decoration: none;
         color: white;
-        border-width: 3px;
+        border-width: ${styles.borderWidth}px;
         border-color: white;
         border-style: solid;
-        background-color: transparent;
+        background: ${styles.bgColor};
         width: 100%;
         text-align: center;
         font-size: ${styles.fontSizes.namePlate}pt;
@@ -119,7 +119,7 @@ const NavLinks = styled.nav`
     #name{
 
         @media screen and (max-width: 800px) {
-            font-size: ${props => scale(props.width, 100, 1140, styles.fontSizes.namePlate/2, styles.fontSizes.namePlate)}pt;
+            font-size: ${props => scale(props.width, 100, 1140, styles.fontSizes.namePlate/1.63, styles.fontSizes.namePlate)}pt;
             width: ${props => scale(props.width, 100, 800, 50, 350)}px;
         }
         @media screen and (min-width: 801px) {
