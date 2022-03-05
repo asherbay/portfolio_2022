@@ -13,5 +13,5 @@ export const styles = {
     minContentWidth: (isMobile ? 0 : 319),
     contentScale: (isMobile ? 5 : 64),
     navWidth: (isMobile ? 116 : 350),
-    borderWidth: 0.,
+    borderWidth: 2,
 }

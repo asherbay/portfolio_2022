@@ -62,7 +62,7 @@ function App() {
         </Routes>
         <Nav/>
       </Content>
-      <Background/>
+      {/* <Background/> */}
     </div>
   );
 }
