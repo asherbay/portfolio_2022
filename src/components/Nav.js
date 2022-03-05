@@ -119,7 +119,7 @@ const NavLinks = styled.nav`
     #name{
 
         @media screen and (max-width: 800px) {
-            font-size: ${props => scale(props.width, 100, 1140, styles.fontSizes.namePlate/2, styles.fontSizes.namePlate)}pt;
+            font-size: ${props => scale(props.width, 100, 1140, styles.fontSizes.namePlate/1.63, styles.fontSizes.namePlate)}pt;
             width: ${props => scale(props.width, 100, 800, 50, 350)}px;
         }
         @media screen and (min-width: 801px) {

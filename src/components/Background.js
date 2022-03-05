@@ -2,31 +2,42 @@ import { ReactP5Wrapper } from "react-p5-wrapper";
 import {Vector} from 'p5'
 import {useEffect, useState, useRef} from 'react'
 import {useLocation} from 'react-router-dom'
+import scale from './Scale'
 const Background = () => {
     const location = useLocation()
-    const frameRate = 90
-    const bRef = useRef(null)
-    // const [b, setB] = useState(null)
-    // const [b2, setB2] = useState(null)
-    // const [nextB, setNextB] = useState(null)
-    // const [nextB2, setNextB2] = useState(null)
-    let b, b2, nextB, nextB2
+    
+    let frameRate = 100
 
-    // const [currentShape, setCurrentShape] = useState(null)
-    // const [morphTimer, setMorphTimer] = useState(0)
+    const bRef = useRef(null)
+    let b, b2, nextB, nextB2
     let currentShape
+
+    //pos1 omitted cuz it's always the center
+    let pos2 = useRef([Math.random() * window.innerWidth *0.8, Math.random() * window.innerHeight * 0.8])
+    let nextPos2 = useRef([Math.min(pos2.current[0] + (Math.random()-0.5) * 50, window.innerWidth * 0.9), pos2.current[1] + (Math.random()-0.5) * 50])
+    let currentPos = pos2.current
+
+    let mag1 = useRef([700, 200]) //magnitude range
+    let nextMag1 = useRef([Math.random() * 400 + 500, Math.random() * 100 + 50])
+    let mag2 = useRef([400, 100])
+    let nextMag2 = useRef([Math.random() * 400 + 200, Math.random() * 50 + 50])
+    
+
     let morphTimer = 0
-    const morphDuration = frameRate * 0.35
+    let morphDuration = frameRate * 0.2
     let paused = true
-    // const [paused, setPaused] = useState(true)
+
     useEffect(()=>{
         console.log("Bg component mounted")
     }, [])
+
+
+
     useEffect(()=>{
         console.log("location change detected: " + location.pathname)
-        // setMorphTimer(0)
+        
+        morphDuration = frameRate * 0.2
         morphTimer = 0
-        // setPaused(false)
         paused = false
 
     }, [location.pathname])
@@ -67,20 +78,20 @@ const Background = () => {
             if(!b){
                 // setB(p5.newBlob(24, Math.floor(Math.random() * 3)+1))
                 console.log("NEW B GEN from " + b)
-                b = p5.newBlob(24, Math.floor(Math.random() * 3)+1)
+                b = p5.newBlob(18, Math.floor(Math.random() * 3)+1)
                 
             }
             if(!b2){
                 // setB2(p5.newBlob(24, Math.floor(Math.random() * 3)+1))
-                b2 = p5.newBlob(24, Math.floor(Math.random() * 3)+1)
+                b2 = p5.newBlob(18, Math.floor(Math.random() * 3)+1)
             }
             if(!nextB){
                 // setNextB(p5.newBlob(24, Math.floor(Math.random() * 3)+1))
-                nextB = p5.newBlob(24, Math.floor(Math.random() * 3)+1)
+                nextB = p5.newBlob(18, Math.floor(Math.random() * 3)+1)
             }
             if(!nextB2){
                 // setNextB2(p5.newBlob(24, Math.floor(Math.random() * 3)+1))
-                nextB2 = p5.newBlob(24, Math.floor(Math.random() * 3)+1)
+                nextB2 = p5.newBlob(18, Math.floor(Math.random() * 3)+1)
             }
             bRef.current = [b, b2, nextB, nextB2]
         }
@@ -92,7 +103,8 @@ const Background = () => {
         p5.setup = () => {
             
             currentShape = [bRef.current[0], bRef.current[1]] // [b, b2]
-       
+            // pos2 = [Math.random() * p5.windowWidth, Math.random() * p5.windowHeight]
+
             console.log("p5 setup: " + b)
             
             if(!canvas){
@@ -101,6 +113,7 @@ const Background = () => {
                 canvas.position(0, 0)
                 canvas.style('z-index', '0')
                 canvas.style('position', 'fixed')
+                
                 return canvas
             }
             
@@ -108,37 +121,52 @@ const Background = () => {
         p5.draw = () => {
             p5.noStroke()
             p5.background(p5.color(0, 0, 0, 255)) 
-            // console.log("b " + b.length)
+            if(morphTimer===0){
+                frameRate = 100
+                p5.frameRate(100)
+            } else {
+                frameRate = 30
+                p5.frameRate(30)
+            }
+            let prog = morphTimer/morphDuration
             if(currentShape){
-                p5.echo(currentShape[0], currentShape[1], [p5.windowWidth/2, p5.windowHeight/2], 700, 200, p5.color(10, 3, 255, 5), p5.color(255, 255, 255, 0), 0.5, 50)
+                p5.echo(currentShape[0], currentShape[1], [p5.windowWidth/2, p5.windowHeight/2], p5.lerp(mag1.current[0], nextMag1.current[0], prog), p5.lerp(mag1.current[1], nextMag1.current[1], prog), p5.color(10, 3, 255, 5), p5.color(255, 255, 255, 0), 1, 50)
+                p5.echo(currentShape[1], currentShape[0], [currentPos[0], currentPos[1]], p5.lerp(mag2.current[0], nextMag2.current[0], prog), p5.lerp(mag2.current[1], nextMag2.current[1], prog), p5.color(10, 120, 55, 5), p5.color(255, 255, 255, 0), 1, 50)
+                
+            } else {
+                console.log("NO SHAPE. POSSIBLE FLICKER")
             }
             if(paused){
                 p5.noLoop()
-            } else {
+            } else { //end of gesture
                 if(morphTimer<morphDuration){
-                    let prog = morphTimer/morphDuration
+                    
                     let inner = bRef.current[0].map((v, index)=>{
-                        return Vector.lerp(v, bRef.current[2][index], prog * p5.map(prog, 0, 1, 1.2, 0.75));
+                        return Vector.lerp(v, bRef.current[2][index], prog * p5.map(prog, 0, 1, 1.5, 0.5));
                     })
                     let outer = bRef.current[1].map((v, index)=>{
-                        return Vector.lerp(v, bRef.current[3][index], prog * p5.map(prog, 0, 1, 1.2, 0.75));
+                        return Vector.lerp(v, bRef.current[3][index], prog * p5.map(prog, 0, 1, 1.4, 0.3));
                     })
-                    // setMorphTimer(morphTimer+1)
-                    // setCurrentShape([inner, outer])
+                    currentPos = [p5.map(prog, 0, 1, pos2.current[0], nextPos2.current[0]), p5.map(prog, 0, 1, pos2.current[1], nextPos2.current[1])]
                     morphTimer++
                     currentShape = [inner, outer]
                 } else {
-                    // setB(currentShape[0])
-                    // setB2(currentShape[1])
+
                     console.log("END MORPH ON " + currentShape[0])
                     b = currentShape[0]
                     b2 = currentShape[1]
-                    // setNextB(p5.newBlob(24, Math.floor(Math.random() * 3)+1))
-                    // setNextB2(p5.newBlob(24, Math.floor(Math.random() * 3)+1))
-                    nextB = p5.newBlob(24, Math.floor(Math.random() * 3)+1)
-                    nextB2 = p5.newBlob(24, Math.floor(Math.random() * 3)+1)
+
+                    nextB = p5.newBlob(18, Math.floor(Math.random() * 3)+1)
+                    nextB2 = p5.newBlob(18, Math.floor(Math.random() * 3)+1)
                     bRef.current = [b, b2, nextB, nextB2]
-                    morphTimer = 0
+                    pos2.current = nextPos2.current 
+                    nextPos2.current = [pos2.current[0] + (Math.random()-0.5) * 50, pos2.current[1] + (Math.random()-0.5) * 50]
+                    mag1.current = nextMag1.current
+                    mag2.current = nextMag2.current
+                    nextMag1.current = [Math.random() * 400 + 500, Math.random() * 100 + 50]
+                    nextMag2.current = [Math.random() * 400 + 200, Math.random() * 50 + 50]
+
+
                     paused = true
                     p5.noLoop()
                 }
@@ -158,12 +186,12 @@ const Background = () => {
         }
 
         p5.echo = (ogBlob, targetBlob, position, ogMag, targetMag, ogColor, targetColor, morphAmt, reps) => {
-            // let targetBlob = p5.newBlob(360/ogBlob.length, 1)
+
             for(let i=0; i<reps; i++){
                 let prog = (i+1)/reps
                 let color = p5.lerpColor(ogColor, targetColor, prog)
                 let mag = p5.lerp(ogMag, targetMag, prog)
-                // console.log("ogBlob: " + ogBlob)
+
                 let rep = ogBlob.map((v, index)=>{
                    return Vector.lerp(v, targetBlob[index], prog * morphAmt);
                 })
@@ -172,8 +200,8 @@ const Background = () => {
             }
         }
 
-        p5.morph = () => {
-
+        p5.windowResized = () => {
+            p5.resizeCanvas(p5.windowWidth, p5.windowHeight)
         } 
 
         
