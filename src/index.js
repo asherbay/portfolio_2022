@@ -7,7 +7,9 @@ import {BrowserRouter} from 'react-router-dom'
 import Background from './components/Background'
 ReactDOM.render(
   <BrowserRouter>
+ 
     <App/>
+     <Background/>
   </BrowserRouter>,
   document.getElementById('root')
 );
