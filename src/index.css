@@ -6,7 +6,7 @@ body {
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
- 
+  background-color: "black";
 }
 
 @font-face {
@@ -23,5 +23,6 @@ html {
 }
 ::-webkit-scrollbar {
     width: 0px;
+    height: 0px;
     background: transparent; /* make scrollbar transparent */
 }

@@ -6,8 +6,10 @@ import reportWebVitals from './reportWebVitals';
 import {BrowserRouter} from 'react-router-dom'
 import Background from './components/Background'
 ReactDOM.render(
-  <BrowserRouter style={{verticalAlign: "top", display: "inline"}}>
-    <App style={{display: "inline", position: "relative", verticalAlign: "top"}}/>
+  <BrowserRouter>
+ 
+    <App/>
+     <Background/>
   </BrowserRouter>,
   document.getElementById('root')
 );
@@ -16,3 +18,6 @@ ReactDOM.render(
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
+
+
+// master control, control 4, dm recruiting people, meetups, 

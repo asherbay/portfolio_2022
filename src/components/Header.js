@@ -36,7 +36,8 @@ export default Body
 const Banner = styled.section`
     
     color: white;
-    border: 3px solid white;
+    background-color: ${styles.bgColor};
+    border: ${styles.borderWidth}px solid white;
     width: ${styles.sectionWidth}vw;
     text-align: center;
 
