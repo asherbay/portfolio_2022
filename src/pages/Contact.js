@@ -7,6 +7,9 @@ import emailjs from '@emailjs/browser'
 import emailkey from '../emailkey'
 import validator from 'validator'
 import {isMobile} from 'react-device-detect'
+import bcPic from '../images/bandcamp1.png'
+import githubPic from '../images/github.png'
+import linkedinPic from '../images/linkedin.png'
 
 const Contact = () => {
     const form = useRef();
@@ -54,6 +57,11 @@ const Contact = () => {
             <Body y={-15} >
                 <p style={{marginTop: "0px",}}>Email: asherbay@gmail.com</p>
                 <p style={{marginBottom: "0px", }}>Phone: 801-822-9437</p>
+                {isMobile && <p style={{marginBottom: "5px", marginTop: "11px"}}>Links: 
+                    <a href="https://github.com/asherbay" target="_blank"><IconLink src={githubPic}></IconLink></a>
+                    <a href="https://www.linkedin.com/in/asherbay/" target="_blank"><IconLink src={linkedinPic}></IconLink></a>
+                    <a href="http://www.asherbay.bandcamp.com" target="_blank"><IconLink src={bcPic}></IconLink></a>
+                </p>}
             </Body>
             <Body y={-15}>
                 {/* <p>Feel free to reach out via email, phone, or by sending a message below.</p> */}
@@ -72,6 +80,19 @@ const Contact = () => {
     )
 }
 export default Contact
+
+const IconLink = styled.img`
+    width: ${styles.tagImgWidth * 0.75}px;
+    border: 0px solid white;
+   display: inline;
+    margin-left: 10px;
+    margin-bottom: -7px;
+    &:hover {
+        transform: scale(115%);
+        cursor: pointer;
+    }
+`
+
 
 const Input = styled.input`
     background: black;
