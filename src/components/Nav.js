@@ -9,7 +9,7 @@ import githubPic from '../images/github.png'
 import linkedinPic from '../images/linkedin.png'
 import resumeIcon from '../images/resume.png'
 import resume from '../images/resume.pdf'
-
+import {isMobile} from 'react-device-detect'
 
 const Nav = () => {
     const location = useLocation()
@@ -29,18 +29,17 @@ const Nav = () => {
     return (
         <NavLinks width={size.width} selPath={currentPage}>
             <br/>
-            {/* <ProfPic src={pic} onClick={()=>{setCurrentPage("home")}} /> */}
-            <NamePlate id="name" currentpage={currentPage} onClick={()=>{setCurrentPage("home")}} to="/">ASHER BAY</NamePlate>
-            <NavLink onClick={setPage} to="/projects">projects {currentPage=="projects" ? '⦿' : '○'} </NavLink>
-            <NavLink onClick={setPage} to="/contact">contact {currentPage=="contact" ? '⦿' : '○'} </NavLink>
-            <NavLink onClick={()=>{window.open(resume)}} to={location.pathname}>resume {currentPage=="resume" ? '⦿' : '○'} </NavLink>
-            {/* <Link to="/backgroundtest">BG</Link> */}
-            <section>
+            
+            <NamePlate id="name" currentpage={currentPage} onClick={()=>{setCurrentPage("home")}} to="/" selected={currentPage==="home"}>ASHER BAY</NamePlate>
+            <NavLink onClick={setPage} to="/projects" selected={currentPage==="projects"}>projects {!isMobile && (currentPage==="projects" ? '⦿' : '○')} </NavLink>
+            <NavLink onClick={setPage} to="/contact" selected={currentPage==="contact"}>contact {!isMobile && (currentPage=="contact" ? '⦿' : '○')} </NavLink>
+            <NavLink onClick={()=>{window.open(resume)}} to={location.pathname} selected={currentPage==="resume"}>resume {!isMobile && (currentPage=="resume" ? '⦿' : '○')} </NavLink>
+            
+            {!isMobile && <section>
                 
                 <a href="https://github.com/asherbay" target="_blank"><IconLink src={githubPic}></IconLink></a>
                 <a href="https://www.linkedin.com/in/asherbay/" target="_blank"><IconLink src={linkedinPic}></IconLink></a>
-                 {/* <a><IconLink src={resumeIcon} onClick={()=>{window.open(resume)}}></IconLink></a> */}
-            </section>
+            </section>}
         </NavLinks>
     )
 }
@@ -48,7 +47,7 @@ export default Nav
 
 
 const IconLink = styled.img`
-    width: 70px;
+    width: ${styles.tagImgWidth}px;
     border: 0px solid white;
     float: right;
     margin-left: 10px;
@@ -61,37 +60,40 @@ const IconLink = styled.img`
 const NavLink = styled(Link)`
     text-decoration: none;
     color: white;
-    background-color: ${styles.bgColor};
+    background: ${isMobile ? "transparent" : styles.bgColor};
     text-align: right;
-    border: ${styles.borderWidth}px solid white;
-    padding: 4px;
-    padding-right: 10px;
-
-    &:hover {
-        color: red;
-    }
+    font-size: ${isMobile ? styles.fontSizes.namePlate : styles.fontSizes.body}pt;
+   ${isMobile ? "border-bottom: 1" : "border: " + styles.borderWidth}px solid white;
+    ${isMobile ? (props => props.selected ? "border: 0px solid white;" : "border: 0px solid white;") : "border: " + styles.borderWidth + "px solid white;"}
+    padding: 5px;
+    padding-right: ${isMobile ? 5 : 10}px;
+    text-decoration: ${props => props.selected && isMobile ? "underline" : "none"};
+    text-decoration-thickness: ${isMobile ? 1 : styles.borderWidth}px;
+    text-underline-offset: ${isMobile ? 5 : 10}px;
+       
+        &:hover {
+          ${ !isMobile && "color: red;" }
+        }   
+   
+    
 `
 
 
 const NamePlate = styled(NavLink)`
         text-decoration: none;
         color: white;
-        border-width: ${styles.borderWidth}px;
-        border-color: white;
-        border-style: solid;
-        background: ${styles.bgColor};
-        width: 100%;
+         ${isMobile ? (props => props.selected ? "border: 0px solid white;" : "border: 0px solid white;") : "border: " + styles.borderWidth + "px solid white;"}
+        background: ${isMobile ? "transparent" : styles.bgColor};
+        
         text-align: center;
         font-size: ${styles.fontSizes.namePlate}pt;
-        padding: 4px;
-        padding-left: 6px;
-        padding-right: 6px;
-        text-decoration: ${props => props.currentpage==="home" ? "underline" : "none"};
-        text-decoration-thickness: 3px;
-        text-underline-offset: 10px;
-        &:hover {
-            color: red;
-        }
+        padding: 5px;
+        padding-left: ${isMobile ? 5 : 6}px;
+        padding-right: ${isMobile ? 5 : 6}px;px;
+        text-decoration: ${props => props.selected ? "underline" : "none"};
+        text-decoration-thickness: ${isMobile ? 1 : 2}px;
+        text-underline-offset: ${isMobile ? 5 : 10}px;
+        
     `
 
 
@@ -100,39 +102,45 @@ const NamePlate = styled(NavLink)`
 
 const NavLinks = styled.nav`
     display: flex;
-    flex-direction: column;
-    gap: 30px;
-  
+    flex-direction: ${isMobile ? "row" : "column"};
+    gap: ${isMobile ? 0 : styles.contentGap}px;
+    
     align-items: center;
-    margin-top: -75px;
+    margin-top: ${isMobile ? -30 : -75}px;
  
-    order: 1;
+    order: ${isMobile ? -1 : 1};
 
-    &>*{
+    ${isMobile && 
+        `&:last-child{
+            padding-left: 0px;
+            
+        };
+        width: 100vw;
+        `
+    }
+
+
+    ${ !isMobile &&
+    `&>*{
         @media screen and (max-width: 800px) {
             width: ${props => scale(props.width, 100, 800, 50, styles.navWidth)}px;
         }
         @media screen and (min-width: 801px) {
             width: ${styles.navWidth}px;
         }
-    }
-    #name{
 
-        @media screen and (max-width: 800px) {
-            font-size: ${props => scale(props.width, 100, 1140, styles.fontSizes.namePlate/1.63, styles.fontSizes.namePlate)}pt;
-            width: ${props => scale(props.width, 100, 800, 50, 350)}px;
-        }
-        @media screen and (min-width: 801px) {
-            font-size: ${styles.fontSizes.namePlate}pt;
-            width: ${styles.navWidth}px;
-        }
     }
-    &>:not(NamePlate){
-        @media screen and (max-width: 800px) {
-            font-size: ${props => scale(props.width, 100, 1140, 12, 25)}pt;
-        }
-        @media screen and (min-width: 801px) {
-            font-size: ${styles.fontSizes.body}pt;
-        }
+    
+        #name{
+
+            @media screen and (max-width: 800px) {
+                font-size: ${isMobile ? styles.fontSizes.namePlate : (props => scale(props.width, 100, 1140, styles.fontSizes.namePlate/1.63, styles.fontSizes.namePlate))}pt;
+                width: ${props => scale(props.width, 100, 800, 50, styles.navWidth)}px;
+            }
+            @media screen and (min-width: 801px) {
+                font-size: ${styles.fontSizes.namePlate}pt;
+                width: ${styles.navWidth}px;
+            }
+        }`
     }
 `

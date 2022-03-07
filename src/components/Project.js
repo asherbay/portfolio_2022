@@ -4,6 +4,7 @@ import Body from '../components/Body'
 import useWindowSize from '../hooks/useWindowSize'
 import scale from './Scale'
 import {styles} from '../Styles'
+import {isMobile} from 'react-device-detect'
 //also need to add info about tech used
 
 let size
@@ -29,7 +30,7 @@ const Project = (props) => {
                     <a href={props.url} style={{textDecorationColor: "white", textUnderlineOffset: "5px"}} target="_blank"><p style={{marginTop: "0px", marginBottom: "0px", color: "white", }}>{props.name}</p></a>
                     <p style={{marginTop: "10px", }}>{props.children}</p>
                     
-                    <section style={{display: "flex", gap: "10px", alignItems: "center", marginBottom: "0px", flexDirection: (size.width>(window.innerWidth<900 ? 475 : 720) ? "row" : "column")}}>
+                    <section style={{display: "flex", gap: "10px", alignItems: "center", marginBottom: "0px", flexDirection: (size.width>(isMobile ? 0 : 720) ? "row" : "column")}}>
                         <p style={{ marginTop: "0px", marginBottom: "0px", position: "relative"}}>Made <br/>with:</p>
                         {props.techTags && renderTechTags()}
                     </section>
@@ -42,7 +43,7 @@ export default Project
 
 
 const TechTag = styled.button`
-    border: 2px solid white;
+    border: ${isMobile ? 1 : 2}px solid white;
     font-family:  Bergen;
     color: white;
     font-size: ${styles.fontSizes.tag}pt;

@@ -17,8 +17,8 @@ const Sect = styled.section`
     border: ${styles.borderWidth}px solid white;
     width: ${styles.sectionWidth}vw;
     font-size: ${styles.fontSizes.body}pt;
-    padding: 30px;
-    margin: 15px;
+    padding: ${styles.contentGap}px;
+    margin: ${styles.contentMargin}px;
     color: white;
     min-width: ${styles.minContentWidth};
     margin-top: ${props => (props.y !== null ? props.y + "px" : "-500px")};
