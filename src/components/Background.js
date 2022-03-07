@@ -3,9 +3,11 @@ import {Vector} from 'p5'
 import {useEffect, useState, useRef} from 'react'
 import {useLocation} from 'react-router-dom'
 import scale from './Scale'
+import {isMobile} from 'react-device-detect'
 const Background = () => {
     const location = useLocation()
-    
+    let mobileScale = (isMobile ? 0.5 : 1)
+
     let frameRate = 100
 
     const bRef = useRef(null)
@@ -17,10 +19,10 @@ const Background = () => {
     let nextPos2 = useRef([Math.min(pos2.current[0] + (Math.random()-0.5) * 50, window.innerWidth * 0.9), pos2.current[1] + (Math.random()-0.5) * 50])
     let currentPos = pos2.current
 
-    let mag1 = useRef([700, 200]) //magnitude range
-    let nextMag1 = useRef([Math.random() * 400 + 500, Math.random() * 100 + 50])
-    let mag2 = useRef([400, 100])
-    let nextMag2 = useRef([Math.random() * 400 + 200, Math.random() * 50 + 50])
+    let mag1 = useRef([700 * mobileScale, 200 * mobileScale]) //magnitude range
+    let nextMag1 = useRef([(Math.random() * 400 + 500) * mobileScale, (Math.random() * 100 + 50) * mobileScale])
+    let mag2 = useRef([400 * mobileScale, 100 * mobileScale])
+    let nextMag2 = useRef([(Math.random() * 400 + 200) * mobileScale, (Math.random() * 50 + 50) * mobileScale])
     
 
     let morphTimer = 0
@@ -163,8 +165,8 @@ const Background = () => {
                     nextPos2.current = [pos2.current[0] + (Math.random()-0.5) * 50, pos2.current[1] + (Math.random()-0.5) * 50]
                     mag1.current = nextMag1.current
                     mag2.current = nextMag2.current
-                    nextMag1.current = [Math.random() * 400 + 500, Math.random() * 100 + 50]
-                    nextMag2.current = [Math.random() * 400 + 200, Math.random() * 50 + 50]
+                    nextMag1.current = [(Math.random() * 400 + 500) * mobileScale, (Math.random() * 100 + 50) * mobileScale]
+                    nextMag2.current = [(Math.random() * 400 + 200) * mobileScale, (Math.random() * 50 + 50) * mobileScale]
 
 
                     paused = true

@@ -28,14 +28,13 @@ const Home = () => {
         return (
             techTags.map((t, i)=>{
                 let initOffset = 0
-                
+
                 return (
                     <TechTag style={{marginLeft: initOffset + "px",}}>
-                        <img src={t.img} style={{width: "70px"}}/>
+                        <img src={t.img} style={{width: styles.tagImgWidth + "px"}}/>
                         {t.name}
                     </TechTag>
                 )
-             
             })
         )
     }
@@ -45,7 +44,7 @@ const Home = () => {
             <Body y={5} >
             
             <ProfPic src={pic}/>
-                I'm Asher Bay, a full stack web developer in Salt Lake City, Utah. I love solving interesting problems, learning new tools, and obsessively tinkering with code.<br/>In 2022 I graduated from DevPoint Labs, a web development bootcamp affiliated with the University of Utah. Since then I've enjoyed continuing to learn and build.
+                I'm Asher Bay, a full stack web developer in Salt Lake City, Utah. I enjoy figuring out new tools and solving interesting problems with code.<br/>In 2022 I graduated from DevPoint Labs, a web development bootcamp affiliated with the University of Utah. Since then I've continued to learn and build.
                 <br/>
                 <br/>
                 <p style={{ marginTop: "0px", marginBottom: "15px", position: "relative"}}>Skills:</p>
@@ -56,7 +55,6 @@ const Home = () => {
                 </section>
             </Body>
         </section>
-       
     )
 }
 export default Home
@@ -87,9 +85,5 @@ const TechTag = styled.button`
     align-items: center;
     gap: 10px;
     left: -12px;
-    &:hover {
-        transform: scale(115%);
-        cursor: pointer;
     
-    }
 `

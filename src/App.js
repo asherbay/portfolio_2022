@@ -75,16 +75,17 @@ export default App;
 
 const Content = styled.div`
   transform-origin: top center;
-  transform: scale(${styles.contentScale}%);  
-  -webkit-transform: scale(${styles.contentScale}%); 
+  transform: scale(${isMobile ? 2 : styles.contentScale}%);  
+  -webkit-transform: scale(${isMobile ? 2 : styles.contentScale}%); 
    
 
   display: flex;  
+  flex-direction: ${!isMobile ? "row" : "column"};
   position: relative;
   top: 20px;
   gap: 10px;
   justify-content: center;
-  align-items: flex-start;
+  align-items: ${isMobile ? "center" : "flex-start"};
   
   z-index: 1;
 `

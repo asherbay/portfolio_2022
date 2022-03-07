@@ -6,6 +6,8 @@ import {styles} from '../Styles'
 import emailjs from '@emailjs/browser'
 import emailkey from '../emailkey'
 import validator from 'validator'
+import {isMobile} from 'react-device-detect'
+
 const Contact = () => {
     const form = useRef();
     const [status, setStatus] = useState("writing")
@@ -73,29 +75,31 @@ export default Contact
 
 const Input = styled.input`
     background: black;
-    border: 3px solid white;
+    border: ${styles.borderWidth}px solid white;
     color: white;
+    border-radius: 0%;
     outline-width: 0; 
     font-size: ${styles.fontSizes.body}pt;
-    width: 100%;
+    width: ${isMobile ? 93 : 100}%;
     padding-top: 5px;
     padding-bottom: 5px;
-    margin-bottom: 20px;
+    margin-bottom: ${isMobile ? 15 : 20}px;
     text-indent: 5pt;
     font-family: Bergen;
 `
 const BigInput = styled.textarea`
     background: transparent;
-    border: 3px solid white;
+    border: ${styles.borderWidth}px solid white;
+    border-radius: 0%;
     color: white;
     outline-width: 0; 
     font-size: ${styles.fontSizes.body}pt;
-    width: 100%;
+    width: ${isMobile ? 93 : 100}%;
     padding-top: 5px;
     padding-bottom: 5px;
     
     text-indent: 5pt;
-    height: 150px;
+    height: ${isMobile ? 70 : 150}px;
     resize: none;
     font-family: Bergen;
 `
@@ -105,20 +109,21 @@ const Field = styled.section`
     flex-direction: column;
     gap: 10px;   
     position: relative;
-    left: -5px;
+    left: ${isMobile ? 0 : -5}px;
     
 `
 const Button = styled.button`
-    border: 2px solid white;
+    border: ${styles.borderWidth}px solid white;
     font-family:  Bergen;
+    
     color: white;
     font-size: ${styles.fontSizes.body}pt;
-    padding 10px;
+    padding ${isMobile ? 5 : 10}px;
     background-color: transparent;
     float: right;
-    margin-top: 30px;
+    margin-top: ${isMobile ? 15 : 30}px;
     position: relative;
-    right: -5px;
+    right: ${isMobile ? 0 : -1}px;
     &:hover {
         cursor: ${props => props.ready ? "pointer" : "not-allowed"};
     }
