@@ -12,7 +12,7 @@ const Projects = () => {
         <section style={{display: 'flex', flexDirection: 'column', gap: styles.contentGap +"px",  position: "relative", }}>
             <Header y={5} >PROJECTS</Header>
             <Project y={-15}  pic={droneFlowerPic} name="Drone Flower" techTags={['React', 'P5.js', 'Tone.js']} url="https://droneflower.app/">
-                An interactive audiovisual experience generator. Watch and listen as the shapes and sounds evolve endlessly.
+                An interactive audiovisual experience machine. Watch and listen as shapes and sounds evolve endlessly.
             </Project>
 
             <Project y={-15} pic={vocalPic}  name="Vocal" url="https://vocaljournal.herokuapp.com/" techTags={['React', 'Ruby+Rails', 'MUI']}>
