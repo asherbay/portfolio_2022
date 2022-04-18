@@ -5,7 +5,7 @@ export const styles = {
         body: (isMobile ? 11 : 25),
         namePlate: (isMobile ? 13.5 : 45),
         project: (isMobile ? 10 : 20),
-        tag: (isMobile ? 8 : 17),
+        tag: (isMobile ? 8 : 20),
     },
     imgWidth: (isMobile ? 100 : 300),
     tagImgWidth: (isMobile ? 35 : 70),
