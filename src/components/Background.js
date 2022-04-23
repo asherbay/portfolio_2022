@@ -30,13 +30,13 @@ const Background = () => {
     let paused = true
 
     useEffect(()=>{
-        console.log("Bg component mounted")
+        // console.log("Bg component mounted")
     }, [])
 
 
 
     useEffect(()=>{
-        console.log("location change detected: " + location.pathname)
+        // console.log("location change detected: " + location.pathname)
         
         morphDuration = frameRate * 0.2
         morphTimer = 0
@@ -107,7 +107,7 @@ const Background = () => {
             currentShape = [bRef.current[0], bRef.current[1]] // [b, b2]
             // pos2 = [Math.random() * p5.windowWidth, Math.random() * p5.windowHeight]
 
-            console.log("p5 setup: " + b)
+            // console.log("p5 setup: " + b)
             
             if(!canvas){
                 canvas = p5.createCanvas(p5.windowWidth, p5.windowHeight)
@@ -154,7 +154,7 @@ const Background = () => {
                     currentShape = [inner, outer]
                 } else {
 
-                    console.log("END MORPH ON " + currentShape[0])
+                    // console.log("END MORPH ON " + currentShape[0])
                     b = currentShape[0]
                     b2 = currentShape[1]
 
