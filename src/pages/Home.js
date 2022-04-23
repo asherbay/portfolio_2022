@@ -173,7 +173,7 @@ const Home = () => {
                                     setProgress(e.target.value)
                                 }} />
                             </BarUI>
-                            <VolUI />
+                            <VolUI audio={audio.current ? audio.current : null}/>
                         </PlayerUI>
                 </Player>
             </CSSTransition>
@@ -183,16 +183,38 @@ const Home = () => {
 }
 export default Home
  
-export const VolUI = () => {
+export const VolUI = (props) => {
     const [open, setOpen] = useState(false)
-    const [val, setVal] = useState(100)
+    const [val, setVal] = useState(0)
+    const volRef = useRef()
+
+    const checkIfClickedOutside = (e) => {
+      if (volRef.current && !volRef.current.contains(e.target)) {
+        setOpen(false);
+      }
+    };
+
+    useEffect(()=>{
+        if(open){
+            window.addEventListener("mousedown", checkIfClickedOutside)
+        } else {
+            window.removeEventListener("mousedown", checkIfClickedOutside)
+        }
+    }, [open])
+
+    useEffect(()=>{
+        if(props.audio!==null){
+            props.audio.volume = (100-val)/100.0
+        }
+    }, [val])
+
     return (
-        <VolBox>
+        <VolBox ref={volRef}>
             <CSSTransition in={!open} timeout={{ enter: 250, exit: 250 }} classNames="openVolPic" > 
                 <VolButton src={VolPic} onClick={()=>{setOpen(true)}} />
             </CSSTransition>
              <CSSTransition in={open} timeout={{ enter: 250, exit: 250 }} classNames="openVol" > 
-                <VolStrip type="range" value={val}/>
+                <VolStrip type="range" value={val} onChange={(e)=>{setVal(e.target.value)}}/>
             </CSSTransition>
         </VolBox>
     )
@@ -265,13 +287,19 @@ const VolBox = styled.span`
     }
 
     &>.openVol-exit {
+        display: inline;
+        opacity: 1.0;
         width: 50px;
     }
     &>.openVol-exit-active {
+        display: inline;
         width: 0px;
-        transition: width 250ms;
+        opacity: 0.0;
+
+        transition: width 250ms, opacity 200ms;
     }
     &>.openVol-exit-done {
+        display: none;
         width: 0px;
         transition: width 250ms;
     }
@@ -281,34 +309,41 @@ const VolBox = styled.span`
 
     &>.openVolPic-enter {
        display: inline;
-       width: 27px;
+       width: 35px;
+       margin-right: 0px;
     }
     &>.openVolPic-enter-active {
         display: inline;
         width: 42px;
-        transition: width 250ms;
+        margin-right: 20px;
+        transition: width 250ms,  margin-right 250ms;
     }
     &>.openVolPic-enter-done {
         display: inline;
         width: 42px;
+        margin-right: 20px;
     }
  
     &>.openVolPic-exit {
         width: 42px;
+        margin-right: 20px;
     }
     &>.openVolPic-exit-active {
-        width: 27px;
-        transition: width 250ms;
+        width: 35px;
+        margin-right: 0px;
+        transition: width 250ms, margin-right 250ms;
     }
     &>.openVolPic-exit-done {
-        width: 27px;
+        width: 35px;
+        margin-right: 0px;
     }
      
 `
 
 const VolButton = styled.img`
     position: relative;
-    left: -10px;
+    margin-right: 20px;
+    margin-left: 10px;
     top: 5px;
 `
 
@@ -317,11 +352,11 @@ const VolStrip = styled.input`
     
     display: none;
     position: relative;
-    width: 50px;
+    margin: 0px;
     transform: rotate(90deg);
     top: 3px;
-    left: -10px;
-    margin: -10px;
+    left: -5px;
+    
     background-color: #474747;
     position: relative;
     &::-webkit-slider-thumb {
@@ -343,14 +378,16 @@ const BarUI = styled.span`
     gap: 2px;
     align-self: center;
     position: relative;
-    left: 25px;
+    left: 0px;
+    margin-right: 10px;
+    margin-left: 10px;
 `
 
 const Info = styled.section`
     font-size: 14pt;
     display: flex;
     justify-content: space-between;
-    width: 92%;
+    width: 100%;
   
 `
 
@@ -380,7 +417,7 @@ const ProgBar = styled.input`
     background-color: #474747;
     position: relative;
     height: 8px;
-    width: 92%;
+    width: 100%;
     &::-webkit-slider-thumb {
         -webkit-appearance: none;
         appearance: none;
@@ -426,7 +463,9 @@ const PlayerUI = styled.section`
 
 const PlayButton = styled.img`
     position: relative;
-    left: 10px;
+    left: 0px;
+    margin-right: 10px;
+    margin-left: 10px;
     top: 3px;
 `
 
