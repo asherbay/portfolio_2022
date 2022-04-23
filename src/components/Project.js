@@ -60,7 +60,7 @@ const TechTag = styled.button`
 
 const ProjBox = styled.section`
     display: flex; 
-    flex-direction: ${props => (props.size.width > 1150 ? "row" : "column")};
+    flex-direction: ${props => (props.size.width > 1250 ? "row" : "column")};
     gap: 20px;
     min-width: ${styles.minContentWidth};
     p{

@@ -18,18 +18,58 @@ import postgresPic from '../images/postgresql.png'
 import {styles} from '../Styles'
 import {Link} from 'react-router-dom'
 import {CSSTransition} from 'react-transition-group'
-import LeanLaser from '../audio/VacuumStudy.wav'
+import VacuumStudy from '../audio/VacuumStudy.wav'
+import AIIM from '../audio/AIIM.wav'
 import PlayPic from '../images/play.png'
 import PausePic from '../images/pause.png'
+import VolPic from '../images/volume.png'
 import playhead from '../images/playhead.png'
 import arrow from '../images/triangle.png'
 const Home = () => {
 
     const [playerOpen, setPlayerOpen] = useState(false)
-    const playerRef = useRef()
+    const [selAudio, setSelAudio] = useState(null)
+    const [selTitle, setSelTitle] = useState(null)
+  
+
+    const [playing, setPlaying] = useState(false)
+    const [progInt, setProgInt] = useState(null)
+    const [progress, setProgress] = useState(0)
+    const audio = useRef()
+
     useEffect(()=>{
         console.log('player: ' + playerOpen)
     }, [playerOpen])
+
+    useEffect(()=>{
+        if(playing && audio.current){
+            audio.current.play()
+            setProgInt(setInterval(() => {
+                let val = audio.current.currentTime / audio.current.duration
+                if(audio.current.ended){
+                    setPlaying(false)
+                } else {
+                    setProgress(val * 100)
+                }
+                
+            }, 250))
+        } else if(!playing && audio.current){
+            audio.current.pause()
+            clearInterval(progInt)
+        }
+    }, [playing])
+
+    useEffect(()=>{
+        let title = (selAudio===VacuumStudy ? "Vacuum Study" : "Afterimage in Motion" )
+        setSelTitle(title)
+        if(playerOpen){
+            if(!playing){
+                setPlaying(true)
+            } else {
+                audio.current.play()
+            }
+        }
+    }, [selAudio])
 
 
     const stackTags = [
@@ -49,6 +89,12 @@ const Home = () => {
         {name: 'Shopify', img: shopifyPic},
     ]
 
+    const formatDuration = (secs) => {
+        var date = new Date(0);
+        date.setSeconds(parseInt(secs)); 
+        return date.toString().substring(19, 24);
+    }
+
     const renderTags = (arr) => {
         return (
             arr.map((t, i)=>{
@@ -64,12 +110,30 @@ const Home = () => {
         )
     }
 
+    const handlePlayerOpen = (audio) => {
+        if(playing && audio.current){
+            audio.current.pause()
+        }
+        if(!playerOpen){
+            setPlayerOpen(true)
+        }
+        setSelAudio(audio)
+    }
+
+    const togglePlayback = () => {
+        if(playing && audio.current){
+            setPlaying(false)
+        } else if(!playing && audio.current){
+            setPlaying(true)
+        }
+    }
+
     return (
-        <section style={{display: 'flex', flexDirection: 'column', gap: "0px", }}>
+        <Container>
             <Body y={5} >
             
             <ProfPic src={pic}/>
-                I'm Asher Bay, a full stack web developer in Salt Lake City, Utah. I enjoy figuring out new tools and obsessing over interesting problems.<br/>In 2022 I graduated from DevPoint Labs, a web development bootcamp affiliated with the University of Utah. Since then I've continued to learn and build.
+                I'm Asher Bay, a web developer in Salt Lake City, Utah. I enjoy figuring out new tools and obsessing over interesting projects.<br/>In 2022 I graduated from DevPoint Labs, a web development bootcamp affiliated with the University of Utah. Since then I've continued to learn and build.
                 
                 
             </Body>
@@ -86,26 +150,209 @@ const Home = () => {
                     {renderTags(toolTags)}
                 </section>
             </Body>
-            
-            <Body style={{overflow: 'hidden'}} ref={playerRef}>
 
-                When I'm not computer nerding I'm often music nerding (on the computer) making stuff like <a onClick={()=>{setPlayerOpen(true)}}>this</a> or this
-                <PlayerBox  className="box sb" width={playerRef.current ? playerRef.current.clientWidth : "100%" }>
-                    <audio src={LeanLaser} />
-                    <CSSTransition in={playerOpen} timeout={{ enter: 500, exit: 500 }} classNames="openPlayer" >
-                                <PlayerUI>
-                                    <img src={PlayPic}/>
-                                    <ProgBar type="range"/>
-                                </PlayerUI>
-                    </CSSTransition>
-                </PlayerBox>
+            <Body style={{overflow: 'hidden'}} >
+
+                When I'm not computer nerding I'm often music nerding (on the computer) making stuff like <AudioLink sel={selAudio===VacuumStudy && playerOpen} onClick={()=>{handlePlayerOpen(VacuumStudy)}} >this</AudioLink> or <AudioLink sel={selAudio===AIIM && playerOpen} onClick={()=>{handlePlayerOpen(AIIM)}}>this</AudioLink>.
+                
+                    
             </Body>
-        </section>
+            <CSSTransition in={playerOpen} timeout={{ enter: 250, exit: 250 }} classNames="openPlayer" onEntered={()=>{setPlaying(true)}} > 
+                <Player>
+                    <audio src={selAudio} ref={audio}/>
+                        <PlayerUI>
+                            <PlayButton src={playing ? PausePic : PlayPic} onClick={togglePlayback}/>
+                            <BarUI>
+                                <Info>
+                                    <span>{selTitle}</span>
+                                    <span>{audio.current ? formatDuration(audio.current.duration) : formatDuration(0)}</span>
+                                </Info>
+                                <ProgBar type="range" value={progress} onChange={
+                                (e)=>{
+                                    audio.current.currentTime = audio.current.duration * (e.target.value / 100.0)
+                                    setProgress(e.target.value)
+                                }} />
+                            </BarUI>
+                            <VolUI />
+                        </PlayerUI>
+                </Player>
+            </CSSTransition>
+
+        </Container>
     )
 }
 export default Home
  
+export const VolUI = () => {
+    const [open, setOpen] = useState(false)
+    const [val, setVal] = useState(100)
+    return (
+        <VolBox>
+            <CSSTransition in={!open} timeout={{ enter: 250, exit: 250 }} classNames="openVolPic" > 
+                <VolButton src={VolPic} onClick={()=>{setOpen(true)}} />
+            </CSSTransition>
+             <CSSTransition in={open} timeout={{ enter: 250, exit: 250 }} classNames="openVol" > 
+                <VolStrip type="range" value={val}/>
+            </CSSTransition>
+        </VolBox>
+    )
+}
 
+//                                <CSSTransition in={volOpen} timeout={{ enter: 250, exit: 250 }} classNames="openVol" > 
+
+//value={audio.current!==null ? audio.current.duration / (audio.current.currentTime + 0.5) : 0}
+const Container = styled.section`
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+    
+    &>.openPlayer-enter {
+        overflow: hidden;
+        display: block;
+        height: 0px;
+        padding-top: 0px;
+        padding-bottom: 0px;
+    }
+    &>.openPlayer-enter-active {
+        height: 50px;
+        padding-top: ${styles.contentGap/2 }px;
+        padding-bottom: ${styles.contentGap/2}px;
+        transition: height 250ms, padding-top 250ms, padding-bottom 250ms;
+    }
+    &>.openPlayer-exit {
+        display: block;
+        height: 50px;
+        padding-top: ${styles.contentGap/2}px;
+        padding-bottom: ${styles.contentGap/2}px;
+    }
+    &>.openPlayer-exit-active {
+        height: 0px;
+        padding-top: 0px;
+        padding-bottom: 0px;
+        transition: height 250ms, padding-top 250ms, padding-bottom 250ms;
+    }
+    &>.openPlayer-enter-done {
+        overflow: visible;
+        display: block;
+        height: 50px;
+        padding-top: ${styles.contentGap/2}px;
+        padding-bottom: ${styles.contentGap/2}px;
+    }
+
+    
+
+`
+
+const VolBox = styled.span`
+    margin: 0px;
+    padding: 0px;
+    max-width: 28px;
+    display: contents;
+    overflow: hidden;
+
+    &>.openVol-enter {
+       display: inline;
+       width: 0px;
+    }
+    &>.openVol-enter-active {
+        display: inline;
+        width: 50px;
+        transition: width 250ms;
+    }
+    &>.openVol-enter-done {
+        display: inline;
+        width: 50px;
+    }
+
+    &>.openVol-exit {
+        width: 50px;
+    }
+    &>.openVol-exit-active {
+        width: 0px;
+        transition: width 250ms;
+    }
+    &>.openVol-exit-done {
+        width: 0px;
+        transition: width 250ms;
+    }
+
+    
+
+
+    &>.openVolPic-enter {
+       display: inline;
+       width: 27px;
+    }
+    &>.openVolPic-enter-active {
+        display: inline;
+        width: 42px;
+        transition: width 250ms;
+    }
+    &>.openVolPic-enter-done {
+        display: inline;
+        width: 42px;
+    }
+ 
+    &>.openVolPic-exit {
+        width: 42px;
+    }
+    &>.openVolPic-exit-active {
+        width: 27px;
+        transition: width 250ms;
+    }
+    &>.openVolPic-exit-done {
+        width: 27px;
+    }
+     
+`
+
+const VolButton = styled.img`
+    position: relative;
+    left: -10px;
+    top: 5px;
+`
+
+const VolStrip = styled.input`
+    -webkit-appearance: none;
+    
+    display: none;
+    position: relative;
+    width: 50px;
+    transform: rotate(90deg);
+    top: 3px;
+    left: -10px;
+    margin: -10px;
+    background-color: #474747;
+    position: relative;
+    &::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        margin: 0px;
+        width: 10px;
+        height: 8px;
+        border: 0;
+        background: white;
+        cursor: pointer;
+    }
+`
+
+const BarUI = styled.span`
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 2px;
+    align-self: center;
+    position: relative;
+    left: 25px;
+`
+
+const Info = styled.section`
+    font-size: 14pt;
+    display: flex;
+    justify-content: space-between;
+    width: 92%;
+  
+`
 
 const ProfPic = styled.img`
     width: ${styles.imgWidth}px;
@@ -119,12 +366,21 @@ const ProfPic = styled.img`
     } 
 `
 
+const AudioLink = styled.a`
+    color: #586ed5;
+    &:hover{
+        cursor: pointer;
+    }
+    text-decoration: ${props => props.sel ? 'underline' : 'none'};
+    text-underline-offset: 2px;
+`
+
 const ProgBar = styled.input`
     -webkit-appearance: none;
     background-color: #474747;
     position: relative;
     height: 8px;
-    width: 90%;
+    width: 92%;
     &::-webkit-slider-thumb {
         -webkit-appearance: none;
         appearance: none;
@@ -137,69 +393,46 @@ const ProgBar = styled.input`
     }
 `
 
-const ArrowBorder = styled.img`
-    margin: 0px;
 
-    overflow: hidden;
-    position: relative;
-    top: -58px;
-    z-index: 2;
-    width: 80px;
-`
 
-const Bubble = styled.section`
-   
+const Player = styled.section`
     height: 0px;
-    display: flex;
-    flex-direction: column;
-    margin: 0px;
-    z-index: -1;
-    align-items: center;
+    position: relative;
+    top: ${0-styles.contentMargin}px;
     overflow: hidden;
-    border-top: 3px solid white;
+    display: none;
+    background: ${styles.bgColor};
+    border: ${styles.borderWidth}px solid white;
+    border-top-width: 0px;
+    width: calc(${styles.sectionWidth}vw + ${styles.contentGap * 2}px);
+    font-size: ${styles.fontSizes.body}pt;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    color: white;
+    min-width: ${styles.minContentWidth};
 `
+
 const PlayerUI = styled.section`
     display: flex;
     width: 100%;
-    height: 0px;
+    position: relative;
+    left: 0px;
+    top: -3px;
     align-items: center;
-    overflow: hidden;
-    border-top: 3px solid white;
-    z-index: -1;
-`
-
-const PlayButton = styled.span`
-    background: black;
-`
-
-const PlayerBox = styled.section`
-   
-   position: relative;
-   left: -30px; 
+    overflow: visible;
+    z-index: 1;
     
-   width: 100%;
-   
-    overflow: hidden;
-    .openPlayer-enter {
-        height: 0px;
-    }
-    .openPlayer-enter-active {
-        height: 50px;
-        transition: height 500ms;
-    }
-    .openPlayer-exit {
-        height: 50px;
-    }
-    .openPlayer-exit-active {
-        height: 0px;
-        transition: height 500ms;
-    }
-    .openPlayer-enter-done {
-        height: 50px;
-    }
-
-
 `
+
+const PlayButton = styled.img`
+    position: relative;
+    left: 10px;
+    top: 3px;
+`
+
+
+
+
 
 const TechTag = styled.button`
     border: 0px solid white;

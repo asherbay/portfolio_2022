@@ -12,7 +12,7 @@ const Body = (props) => {
 export default Body
 
 // instead of making width directly proportional to window size, make just a couple fixed width options, conditional on window size
-const Sect = styled.section`
+export const Sect = styled.section`
     background: ${styles.bgColor};
     border: ${styles.borderWidth}px solid white;
     width: ${styles.sectionWidth}vw;
