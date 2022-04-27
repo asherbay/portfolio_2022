@@ -5,6 +5,8 @@ import Project from '../components/Project'
 import droneFlowerPic from '../images/droneflowerpic.png'
 import vocalPic from '../images/vocalpic.png'
 import portfolioPic from '../images/portfoliopic.png'
+import digitPic from '../images/DigitDial.png'
+import playerPic from '../images/PopupPlayer.png'
 import {styles} from '../Styles'
 const Projects = () => {
 
@@ -17,6 +19,14 @@ const Projects = () => {
 
             <Project y={-15} pic={vocalPic}  name="Vocal" url="https://vocaljournal.herokuapp.com/" techTags={['React', 'Ruby+Rails', 'MUI']}>
                 A full stack audio journal app featuring user authentication, usage analytics, and cloud data storage/retrieval.
+            </Project>
+
+            <Project y={-15} pic={digitPic}  name="Digit Scroller" url="https://codesandbox.io/s/digit-dial-q30lc6?file=/" techTags={['React', 'Styled']}>
+                A UI tool for dialing in numbers at arbitrary levels of precision.
+            </Project>
+
+            <Project y={-15} pic={playerPic}  name="Popup Player" url="https://codesandbox.io/s/popup-player-z6fdok" techTags={['React', 'CSSTransition']}>
+               A minimal animated audio player.
             </Project>
 
             <Project y={-15} pic={portfolioPic}  name="Portfolio" url="https://asherbay.dev/" techTags={['React', 'P5.js']}>
