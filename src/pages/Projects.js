@@ -8,10 +8,12 @@ import portfolioPic from '../images/portfoliopic.png'
 import digitPic from '../images/DigitDial.png'
 import playerPic from '../images/PopupPlayer.png'
 import {styles} from '../Styles'
+import {isMobile} from 'react-device-detect'
+
 const Projects = () => {
 
     return (
-        <section style={{display: 'flex', flexDirection: 'column', gap: styles.contentGap +"px",  position: "relative", }}>
+        <section style={{display: 'flex', flexDirection: 'column', gap: (isMobile ? "20px" : "30px"),  position: "relative", }}>
             <Header y={5} >PROJECTS</Header>
             <Project y={-15}  pic={droneFlowerPic} name="Drone Flower" techTags={['React', 'P5.js', 'Tone.js']} url="https://droneflower.app/">
                 An interactive audiovisual experience machine. Watch and listen as shapes and sounds evolve endlessly.

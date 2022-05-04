@@ -25,6 +25,7 @@ import PausePic from '../images/pause.svg'
 import VolPic from '../images/volume.svg'
 import playhead from '../images/playhead.png'
 import arrow from '../images/triangle.png'
+import {isMobile} from 'react-device-detect'
 const Home = () => {
 
     const [playerOpen, setPlayerOpen] = useState(false)
@@ -140,12 +141,12 @@ const Home = () => {
             <Body >
                 <p style={{ marginTop: "0px", marginBottom: "15px", position: "relative"}}>Tech stack:</p>
                 
-                <section style={{display: "flex", rowGap: "15px", columnGap: "10px", alignItems: "center", alignContent: "space-between", justifyContent: "center", marginBottom: "0px", flexWrap: "wrap", marginRight: "50", marginLeft: "50",}}>
+                <section style={{display: "flex", rowGap: (isMobile ? "5px" : "15px"), columnGap: (isMobile ? "1px" : "10px"), alignItems: "center", alignContent: "space-between", justifyContent: "center", marginBottom: "0px", flexWrap: "wrap", marginRight: "50", marginLeft: "50",}}>
                     {/* React, JavaScript, HTML, CSS, Ruby on Rails, Postgres  */}
                     {renderTags(stackTags)}
                 </section>
-                <p style={{ marginTop: "45px", marginBottom: "15px", position: "relative"}}>Tools and platforms:</p>
-                <section style={{display: "flex", rowGap: "15px", columnGap: "10px", alignItems: "center", alignContent: "space-between", justifyContent: "center", marginBottom: "0px", flexWrap: "wrap", marginRight: "50", marginLeft: "50",}}>
+                <p style={{ marginTop: isMobile ? "15px" : "45px", marginBottom: "15px", position: "relative"}}>Tools and platforms:</p>
+                <section style={{display: "flex", rowGap: (isMobile ? "5px" : "15px"), columnGap: (isMobile ? "1px" : "10px"), alignItems: "center", alignContent: "space-between", justifyContent: "center", marginBottom: "0px", flexWrap: "wrap", marginRight: (isMobile ? "25px" : "50"), marginLeft: (isMobile ? "25px" : "50"),}}>
                     
                     {renderTags(toolTags)}
                 </section>
@@ -236,14 +237,14 @@ const Container = styled.section`
         padding-bottom: 0px;
     }
     &>.openPlayer-enter-active {
-        height: 50px;
+        height: ${isMobile ? 35 : 50}px;
         padding-top: ${styles.contentGap/2 }px;
         padding-bottom: ${styles.contentGap/2}px;
         transition: height 250ms, padding-top 250ms, padding-bottom 250ms;
     }
     &>.openPlayer-exit {
         display: block;
-        height: 50px;
+        height: ${isMobile ? 35 : 50}px;
         padding-top: ${styles.contentGap/2}px;
         padding-bottom: ${styles.contentGap/2}px;
     }
@@ -256,7 +257,7 @@ const Container = styled.section`
     &>.openPlayer-enter-done {
         overflow: visible;
         display: block;
-        height: 50px;
+        height: ${isMobile ? 35 : 50}px;
         padding-top: ${styles.contentGap/2}px;
         padding-bottom: ${styles.contentGap/2}px;
     }
@@ -272,24 +273,25 @@ const VolBox = styled.span`
     display: contents;
     overflow: hidden;
 
+    
     &>.openVol-enter {
        display: inline;
        width: 0px;
     }
     &>.openVol-enter-active {
         display: inline;
-        width: 50px;
+        width: ${isMobile ? 35 : 50}px;
         transition: width 250ms;
     }
     &>.openVol-enter-done {
         display: inline;
-        width: 50px;
+        width: ${isMobile ? 35 : 50}px;
     }
 
     &>.openVol-exit {
         display: inline;
         opacity: 1.0;
-        width: 50px;
+        width: ${isMobile ? 35 : 50}px;
     }
     &>.openVol-exit-active {
         display: inline;
@@ -309,32 +311,32 @@ const VolBox = styled.span`
 
     &>.openVolPic-enter {
        display: inline;
-       width: 35px;
+       width: ${isMobile ? 20 : 35}px;
        margin-right: 0px;
     }
     &>.openVolPic-enter-active {
         display: inline;
-        width: 42px;
-        margin-right: 20px;
+        width: ${isMobile ? 30 : 42}px;
+        margin-right: ${isMobile ? 8 : 20}px;
         transition: width 250ms,  margin-right 250ms;
     }
     &>.openVolPic-enter-done {
         display: inline;
-        width: 42px;
-        margin-right: 20px;
+        width: ${isMobile ? 30 : 42}px;
+        margin-right: ${isMobile ? 8 : 20}px;
     }
  
     &>.openVolPic-exit {
-        width: 42px;
-        margin-right: 20px;
+        width:  ${isMobile ? 30 : 42}px;
+        margin-right: ${isMobile ? 8 : 20}px;
     }
     &>.openVolPic-exit-active {
-        width: 35px;
+        width:  ${isMobile ? 20 : 35}px;
         margin-right: 0px;
         transition: width 250ms, margin-right 250ms;
     }
     &>.openVolPic-exit-done {
-        width: 35px;
+        width:  ${isMobile ? 20 : 35}px;
         margin-right: 0px;
     }
      
@@ -342,8 +344,9 @@ const VolBox = styled.span`
 
 const VolButton = styled.img`
     position: relative;
-    margin-right: 20px;
-    margin-left: 10px;
+    ${isMobile && 'width: 30px;'}
+    margin-right: ${isMobile ? 8 : 20}px;
+    margin-left: ${isMobile ? 3 : 10}px;
     top: 5px;
 `
 
@@ -384,7 +387,8 @@ const BarUI = styled.span`
 `
 
 const Info = styled.section`
-    font-size: 14pt;
+    font-size: ${isMobile ? 8 : 14}pt;
+
     display: flex;
     justify-content: space-between;
     width: 100%;
@@ -434,6 +438,7 @@ const ProgBar = styled.input`
 
 const Player = styled.section`
     height: 0px;
+    
     position: relative;
     top: ${0-styles.contentMargin}px;
     overflow: hidden;
@@ -443,6 +448,7 @@ const Player = styled.section`
     border-top-width: 0px;
     width: calc(${styles.sectionWidth}vw + ${styles.contentGap * 2}px);
     font-size: ${styles.fontSizes.body}pt;
+   
     padding-top: 0px;
     padding-bottom: 0px;
     color: white;
@@ -454,18 +460,22 @@ const PlayerUI = styled.section`
     width: 100%;
     position: relative;
     left: 0px;
-    top: -3px;
+    top: ${isMobile ? 0 : -3}px;
     align-items: center;
     overflow: visible;
     z-index: 1;
+    &>img{
+        ${isMobile && 'width: 30px'}
+    }
+  
     
 `
 
 const PlayButton = styled.img`
     position: relative;
     left: 0px;
-    margin-right: 10px;
-    margin-left: 10px;
+    margin-right: ${isMobile ? 0 : 0}px;
+    margin-left: ${isMobile ? 5 : 10}px;
     top: 3px;
 `
 
@@ -485,7 +495,11 @@ const TechTag = styled.button`
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 10px;
-    left: -12px;
+    gap: ${isMobile ? 2 : 10}px;
+    ${!isMobile && 'left: -12px'}
+    img{
+        ${isMobile && 'width: 35px'}
+    }
+    
     
 `
