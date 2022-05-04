@@ -75,8 +75,8 @@ export default App;
 
 const Content = styled.div`
   transform-origin: top center;
-  transform: scale(${isMobile ? 2 : styles.contentScale}%);  
-  -webkit-transform: scale(${isMobile ? 2 : styles.contentScale}%); 
+  transform: scale(${isMobile ? 100 : styles.contentScale}%);  
+  -webkit-transform: scale(${isMobile ? 100 : styles.contentScale}%); 
    
 
   display: flex;  
