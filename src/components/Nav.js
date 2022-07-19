@@ -1,3 +1,4 @@
+import resume from '../images/resumeJune.pdf'
 import {Link, useLocation} from 'react-router-dom'
 import React, {useState, useEffect, } from 'react'
 import styled from 'styled-components'
@@ -8,7 +9,7 @@ import useWindowSize from '../hooks/useWindowSize'
 import githubPic from '../images/github.png'
 import linkedinPic from '../images/linkedin.png'
 import resumeIcon from '../images/resume.png'
-import resume from '../images/resume.pdf'
+
 import {isMobile} from 'react-device-detect'
 
 const Nav = () => {
@@ -21,9 +22,9 @@ const Nav = () => {
     }
 
 
-    useEffect(()=>{
-        console.log("location.pathname " + currentPage)
-    }, [location.pathname])
+    // useEffect(()=>{
+    //     console.log("location.pathname " + currentPage)
+    // }, [location.pathname])
 
 
     return (

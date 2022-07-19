@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import Body from '../components/Body'
 import Header from '../components/Header'
-import resume from '../images/resume.jpg'
+import resume from '../images/resumeJune.pdf'
 
 const Resume = () => {
 
