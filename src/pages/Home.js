@@ -134,7 +134,7 @@ const Home = () => {
             <Body y={5} >
             
             <ProfPic src={pic}/>
-                I'm Asher Bay, a web developer in Salt Lake City, Utah. I enjoy figuring out new tools and obsessing over interesting projects.<br/>In 2022 I graduated from DevPoint Labs, a web development bootcamp affiliated with the University of Utah. Since then I've continued to learn and build.
+                I'm Asher Bay, a developer in Salt Lake City, Utah. I build websites and apps with React and Ruby on Rails. I enjoy figuring out new tools and obsessing over interesting projects.<br/>In 2022 I graduated from DevPoint Labs, the University of Utah's full stack bootcamp. Since then I've continued to learn and build.
                 
                 
             </Body>
