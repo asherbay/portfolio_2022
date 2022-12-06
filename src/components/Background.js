@@ -27,7 +27,7 @@ const Background = () => {
 
     let morphTimer = 0
     let morphDuration = frameRate * 0.2
-    let paused = false
+    let paused = true
     let pauseDelay = null
 
     useEffect(()=>{
@@ -36,14 +36,14 @@ const Background = () => {
 
 
 
-    useEffect(()=>{
-        // console.log("location change detected: " + location.pathname)
+    // useEffect(()=>{
+    //     // console.log("location change detected: " + location.pathname)
         
-        morphDuration = frameRate * 0.2
-        morphTimer = 0
-        // paused = false
+    //     morphDuration = frameRate * 0.2
+    //     morphTimer = 0
+    //     // paused = false
 
-    }, [location.pathname])
+    // }, [location.pathname])
 
     // useEffect(()=>{
     //         // setCurrentShape([b, b2])
