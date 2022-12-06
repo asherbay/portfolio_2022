@@ -26,6 +26,48 @@ import VolPic from '../images/volume.svg'
 import playhead from '../images/playhead.png'
 import arrow from '../images/triangle.png'
 import {isMobile} from 'react-device-detect'
+
+import MUUU from '../images/faceAngles/0 3.png'
+import MUU from '../images/faceAngles/0 2.png'
+import MU from '../images/faceAngles/0 1.png'
+import MM from '../images/faceAngles/0 0.png'
+import MD from '../images/faceAngles/0 -1.png'
+import MDD from '../images/faceAngles/0 -2.png'
+import MDDD from '../images/faceAngles/0 -3.png'
+
+import RUUU from '../images/faceAngles/1 3.png'
+import RUU from '../images/faceAngles/1 2.png'
+import RU from '../images/faceAngles/1 1.png'
+import RM from '../images/faceAngles/1 0.png'
+import RD from '../images/faceAngles/1 -1.png'
+import RDD from '../images/faceAngles/1 -2.png'
+import RDDD from '../images/faceAngles/1 -3.png'
+
+import RRUUU from '../images/faceAngles/2 3.png'
+import RRUU from '../images/faceAngles/2 2.png'
+import RRU from '../images/faceAngles/2 1.png'
+import RRM from '../images/faceAngles/2 0.png'
+import RRD from '../images/faceAngles/2 -1.png'
+import RRDD from '../images/faceAngles/2 -2.png'
+import RRDDD from '../images/faceAngles/2 -3.png'
+
+import LUUU from '../images/faceAngles/-1 3.png'
+import LUU from '../images/faceAngles/-1 2.png'
+import LU from '../images/faceAngles/-1 1.png'
+import LM from '../images/faceAngles/-1 0.png'
+import LD from '../images/faceAngles/-1 -1.png'
+import LDD from '../images/faceAngles/-1 -2.png'
+import LDDD from '../images/faceAngles/-1 -3.png'
+
+import LLUUU from '../images/faceAngles/-2 3.png'
+import LLUU from '../images/faceAngles/-2 2.png'
+import LLU from '../images/faceAngles/-2 1.png'
+import LLM from '../images/faceAngles/-2 0.png'
+import LLD from '../images/faceAngles/-2 -1.png'
+import LLDD from '../images/faceAngles/-2 -2.png'
+import LLDDD from '../images/faceAngles/-2 -3.png'
+
+
 const Home = () => {
 
     const [playerOpen, setPlayerOpen] = useState(false)
@@ -127,6 +169,10 @@ const Home = () => {
         } else if(!playing && audio.current){
             setPlaying(true)
         }
+    }
+
+    const LookingAtCursor = () =>{
+        
     }
 
     return (

@@ -27,7 +27,8 @@ const Background = () => {
 
     let morphTimer = 0
     let morphDuration = frameRate * 0.2
-    let paused = true
+    let paused = false
+    let pauseDelay = null
 
     useEffect(()=>{
         // console.log("Bg component mounted")
@@ -40,7 +41,7 @@ const Background = () => {
         
         morphDuration = frameRate * 0.2
         morphTimer = 0
-        paused = false
+        // paused = false
 
     }, [location.pathname])
 
@@ -120,7 +121,23 @@ const Background = () => {
             }
             
         }
+        
+        p5.mouseMoved = () => {
+            if(pauseDelay){
+                clearTimeout(pauseDelay)
+                
+            }
+            // console.log('mouse')
+            morphDuration = frameRate * 0.5
+            p5.loop()
+            paused = false
+            pauseDelay = setTimeout(()=>{
+                // console.log('pause')
+                paused = true
+            }, 100)
+        }
         p5.draw = () => {
+            // console.log('draw')
             p5.noStroke()
             p5.background(p5.color(0, 0, 0, 255)) 
             if(morphTimer===0){
@@ -139,6 +156,7 @@ const Background = () => {
                 console.log("NO SHAPE. POSSIBLE FLICKER")
             }
             if(paused){
+                // console.log("paused")
                 p5.noLoop()
             } else { //end of gesture
                 if(morphTimer<morphDuration){
@@ -150,6 +168,7 @@ const Background = () => {
                         return Vector.lerp(v, bRef.current[3][index], prog * p5.map(prog, 0, 1, 1.4, 0.3));
                     })
                     currentPos = [p5.map(prog, 0, 1, pos2.current[0], nextPos2.current[0]), p5.map(prog, 0, 1, pos2.current[1], nextPos2.current[1])]
+                    currentPos = [p5.lerp(currentPos[0], p5.mouseX, 0.3), p5.lerp(currentPos[1], p5.mouseY, 0.2) ] 
                     morphTimer++
                     currentShape = [inner, outer]
                 } else {
@@ -168,13 +187,13 @@ const Background = () => {
                     nextMag1.current = [(Math.random() * 400 + 500) * mobileScale, (Math.random() * 100 + 50) * mobileScale]
                     nextMag2.current = [(Math.random() * 400 + 200) * mobileScale, (Math.random() * 50 + 50) * mobileScale]
 
-
-                    paused = true
+                    morphTimer = 0
+                   // paused = true
                     p5.noLoop()
                 }
             }
         }
-
+        
         
 
         p5.drawBlob = (blob, position, color, mag) => {
