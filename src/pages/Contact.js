@@ -95,7 +95,7 @@ const IconLink = styled.img`
 
 
 const Input = styled.input`
-    background: black;
+    background: transparent;
     border: ${styles.borderWidth}px solid white;
     color: white;
     border-radius: 0%;
