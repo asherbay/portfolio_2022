@@ -2,6 +2,12 @@ import React, {useState, useEffect, useRef} from 'react'
 import styled from 'styled-components'
 import Body from '../components/Body'
 import pic from '../images/smile001.png'
+import pic2 from '../images/face.png'
+
+import jiraPic from '../images/jira.png'
+import npmPic from '../images/npm.png'
+
+
 import jsPic from '../images/javascript.png'
 import htmlPic from '../images/html5.png'
 import cssPic from '../images/css3.png'
@@ -27,58 +33,71 @@ import playhead from '../images/playhead.png'
 import arrow from '../images/triangle.png'
 import {isMobile} from 'react-device-detect'
 
-import MUUU from '../images/faceAngles/0 3.png'
 import MUU from '../images/faceAngles/0 2.png'
 import MU from '../images/faceAngles/0 1.png'
 import MM from '../images/faceAngles/0 0.png'
 import MD from '../images/faceAngles/0 -1.png'
 import MDD from '../images/faceAngles/0 -2.png'
-import MDDD from '../images/faceAngles/0 -3.png'
 
-import RUUU from '../images/faceAngles/1 3.png'
 import RUU from '../images/faceAngles/1 2.png'
 import RU from '../images/faceAngles/1 1.png'
 import RM from '../images/faceAngles/1 0.png'
 import RD from '../images/faceAngles/1 -1.png'
 import RDD from '../images/faceAngles/1 -2.png'
-import RDDD from '../images/faceAngles/1 -3.png'
 
-import RRUUU from '../images/faceAngles/2 3.png'
 import RRUU from '../images/faceAngles/2 2.png'
 import RRU from '../images/faceAngles/2 1.png'
 import RRM from '../images/faceAngles/2 0.png'
 import RRD from '../images/faceAngles/2 -1.png'
 import RRDD from '../images/faceAngles/2 -2.png'
-import RRDDD from '../images/faceAngles/2 -3.png'
 
-import LUUU from '../images/faceAngles/-1 3.png'
+
 import LUU from '../images/faceAngles/-1 2.png'
 import LU from '../images/faceAngles/-1 1.png'
 import LM from '../images/faceAngles/-1 0.png'
 import LD from '../images/faceAngles/-1 -1.png'
 import LDD from '../images/faceAngles/-1 -2.png'
-import LDDD from '../images/faceAngles/-1 -3.png'
 
-import LLUUU from '../images/faceAngles/-2 3.png'
 import LLUU from '../images/faceAngles/-2 2.png'
 import LLU from '../images/faceAngles/-2 1.png'
 import LLM from '../images/faceAngles/-2 0.png'
 import LLD from '../images/faceAngles/-2 -1.png'
 import LLDD from '../images/faceAngles/-2 -2.png'
-import LLDDD from '../images/faceAngles/-2 -3.png'
 
+const faceAngles = [
+    [LLUU, LLU, LLM, LLD, LLDD],
+    [LUU, LU, LM, LD, LDD],
+    [MUU, MU, MM, MD, MDD],
+    [RUU, RU, RM, RD, RDD],
+    [RRUU, RRU, RRM, RRD, RRDD],
+]
 
 const Home = () => {
 
     const [playerOpen, setPlayerOpen] = useState(false)
     const [selAudio, setSelAudio] = useState(null)
     const [selTitle, setSelTitle] = useState(null)
-  
+    const [facePic, setFacePic] = useState(MM)
 
     const [playing, setPlaying] = useState(false)
     const [progInt, setProgInt] = useState(null)
     const [progress, setProgress] = useState(0)
+    const [mousePos, setMousePos] = useState({})
+
     const audio = useRef()
+
+    useEffect(() => {
+
+    
+        window.addEventListener('mousemove', LookAtCursor);
+    
+        return () => {
+          window.removeEventListener(
+            'mousemove',
+            LookAtCursor
+          );
+        };
+      }, []);
 
     useEffect(()=>{
         console.log('player: ' + playerOpen)
@@ -126,8 +145,9 @@ const Home = () => {
     ]
     const toolTags = [
         {name: 'Git', img: gitPic},
-        {name: 'Heroku', img: herokuPic},
         {name: 'Figma', img: figmaPic},
+        {name: 'Jira', img: jiraPic},
+        {name: 'Heroku', img: herokuPic},
         {name: 'WordPress', img: wpPic},
         {name: 'Shopify', img: shopifyPic},
     ]
@@ -171,17 +191,40 @@ const Home = () => {
         }
     }
 
-    const LookingAtCursor = () =>{
-        
+    const LookAtCursor = (e) =>{
+        let mouseX = e.clientX
+        let mouseY = e.clientY
+        let width = window.innerWidth
+        let height = window.innerHeight
+        let relX = mouseX / width
+        let relY = mouseY / height
+
+        let indexX
+        for(let i=0; i<5; i++){
+            if(relX >= (i/5)){
+                indexX = i
+            }
+        }
+        let indexY
+        for(let i=0; i<5; i++){
+            if(relY >= (i/2/5)){
+                indexY = i
+            }
+        }
+        console.log('x:', indexX, 'y:', indexY)
+        setFacePic(faceAngles[indexX][indexY])
+
+
     }
 
+    
+
     return (
-        <Container>
+        <Container >
             <Body y={5} >
             
-            <ProfPic src={pic}/>
-                I'm Asher Bay, a developer in Salt Lake City, Utah. I build websites and apps with React and Ruby on Rails. I enjoy figuring out new tools and obsessing over interesting projects.<br/>In 2022 I graduated from DevPoint Labs, the University of Utah's full stack bootcamp. Since then I've continued to learn and build.
-                
+            <ProfPic src={pic} />
+                I'm Asher Bay, a developer in Salt Lake City, Utah. I build websites and apps with React and Ruby on Rails. I love obsessing over interesting projects and figuring out new tools. I discovered my passion for programming in 2019 while studying music composition in college.<br/>In 2022 I graduated from DevPoint Labs, the University of Utah's full stack bootcamp. After that I began a software engineering internship with Fresh App Design and Development which currently continues.
                 
             </Body>
             <Body >
@@ -311,6 +354,7 @@ const Container = styled.section`
     
 
 `
+
 
 const VolBox = styled.span`
     margin: 0px;
@@ -452,6 +496,8 @@ const ProfPic = styled.img`
         cursor: pointer;
     } 
 `
+
+
 
 const AudioLink = styled.a`
     color: #586ed5;
