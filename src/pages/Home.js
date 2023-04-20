@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import Body from '../components/Body'
 import pic from '../images/smile001.png'
 import pic2 from '../images/face.png'
+import aiPic from '../images/ai_me.png'
 
 import jiraPic from '../images/jira.png'
 import npmPic from '../images/npm.png'
@@ -223,8 +224,8 @@ const Home = () => {
         <Container >
             <Body y={5} >
             
-            <ProfPic src={pic} />
-                I'm Asher Bay, a developer in Salt Lake City, Utah. I build websites and apps with React and Ruby on Rails. I love obsessing over interesting projects and figuring out new tools. I discovered my passion for programming in 2019 while studying music composition in college.<br/>In 2022 I graduated from DevPoint Labs, the University of Utah's full stack bootcamp. After that I began a software engineering internship with Fresh App Design and Development which currently continues.
+            <ProfPic src={aiPic} />
+                I'm Asher Bay, a developer in Salt Lake City, Utah. I build websites and apps with React and Ruby on Rails. I love obsessing over interesting projects and figuring out new tools. I discovered my passion for programming in 2019 while studying music composition in college.<br/>In 2022 I graduated from DevPoint Labs, the University of Utah's full stack bootcamp. After that I began my current role as a software engineer intern developing a crypto-based browser game with Element United. 
                 
             </Body>
             <Body >
@@ -234,7 +235,7 @@ const Home = () => {
                     {/* React, JavaScript, HTML, CSS, Ruby on Rails, Postgres  */}
                     {renderTags(stackTags)}
                 </section>
-                <p style={{ marginTop: isMobile ? "15px" : "45px", marginBottom: "15px", position: "relative"}}>Tools and platforms:</p>
+                <p style={{ marginTop: isMobile ? "15px" : "45px", marginBottom: "15px", position: "relative"}}>Other tools and platforms:</p>
                 <section style={{display: "flex", rowGap: (isMobile ? "5px" : "15px"), columnGap: (isMobile ? "1px" : "10px"), alignItems: "center", alignContent: "space-between", justifyContent: "center", marginBottom: "0px", flexWrap: "wrap", marginRight: (isMobile ? "25px" : "50"), marginLeft: (isMobile ? "25px" : "50"),}}>
                     
                     {renderTags(toolTags)}
@@ -486,7 +487,7 @@ const Info = styled.section`
 `
 
 const ProfPic = styled.img`
-    width: ${styles.imgWidth}px;
+    width: ${styles.imgWidth*2}px;
     border-radius: 50%;
     float: right;
     margin-left: 10px;

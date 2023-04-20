@@ -1,67 +1,16 @@
 import { ReactP5Wrapper } from "react-p5-wrapper";
-import {Vector} from 'p5'
-import {useEffect, useState, useRef} from 'react'
-import {useLocation} from 'react-router-dom'
-import scale from './Scale'
 import {isMobile} from 'react-device-detect'
 const Background = () => {
     const location = useLocation()
     let mobileScale = (isMobile ? 0.5 : 1)
 
-    let frameRate = 25
+    let frameRate = 100
 
-    const bRef = useRef(null)
-    let b, b2, nextB, nextB2
-    let currentShape
-
-    //pos1 omitted cuz it's always the center
-    let pos2 = useRef([Math.random() * window.innerWidth *0.8, Math.random() * window.innerHeight * 0.8])
-    let nextPos2 = useRef([Math.min(pos2.current[0] + (Math.random()-0.5) * 50, window.innerWidth * 0.9), pos2.current[1] + (Math.random()-0.5) * 50])
-    let currentPos = pos2.current
-
-    let mag1 = useRef([700 * mobileScale, 200 * mobileScale]) //magnitude range
-    let nextMag1 = useRef([(Math.random() * 400 + 500) * mobileScale, (Math.random() * 100 + 50) * mobileScale])
-    let mag2 = useRef([400 * mobileScale, 100 * mobileScale])
-    let nextMag2 = useRef([(Math.random() * 400 + 200) * mobileScale, (Math.random() * 50 + 50) * mobileScale])
-    
-
-    let morphTimer = 0
-    let morphDuration = frameRate * 2
-    let paused = false
-    let pauseDelay = null
-
-    useEffect(()=>{
-        // console.log("Bg component mounted")
-    }, [])
-
-
-
-    // useEffect(()=>{
-    //     // console.log("location change detected: " + location.pathname)
-        
-    //     morphDuration = frameRate * 0.2
-    //     morphTimer = 0
-    //     // paused = false
-
-    // }, [location.pathname])
-
-    // useEffect(()=>{
-    //         // setCurrentShape([b, b2])
-    //         currentShape = [b, b2]
-    // }, [b2])
-    
-    
-    let canvas = null
 
 
     const sketch = (p5) =>{
         p5.frameRate(frameRate)
-        // class Blob {
-        //     constructor(position, id) {
 
-        //     }
-
-        // }
 
         p5.newBlob = (smoothness, wobbliness) =>{
             let seedX = Math.random()
@@ -128,12 +77,12 @@ const Background = () => {
                 
             }
             // console.log('mouse')
-            // morphDuration = frameRate * 0.5
+            morphDuration = frameRate * 0.5
             p5.loop()
             paused = false
             pauseDelay = setTimeout(()=>{
                 // console.log('pause')
-                paused = false
+                paused = true
             }, 100)
         }
         p5.draw = () => {
@@ -157,7 +106,7 @@ const Background = () => {
             }
             if(paused){
                 // console.log("paused")
-                //p5.noLoop()
+                p5.noLoop()
             } else { //end of gesture
                 if(morphTimer<morphDuration){
                     
@@ -168,7 +117,7 @@ const Background = () => {
                         return Vector.lerp(v, bRef.current[3][index], prog * p5.map(prog, 0, 1, 1.4, 0.3));
                     })
                     currentPos = [p5.map(prog, 0, 1, pos2.current[0], nextPos2.current[0]), p5.map(prog, 0, 1, pos2.current[1], nextPos2.current[1])]
-                    currentPos = [currentPos[0], currentPos[1] ] 
+                    currentPos = [p5.lerp(currentPos[0], p5.mouseX, 0.3), p5.lerp(currentPos[1], p5.mouseY, 0.2) ] 
                     morphTimer++
                     currentShape = [inner, outer]
                 } else {
@@ -189,7 +138,7 @@ const Background = () => {
 
                     morphTimer = 0
                    // paused = true
-                    // p5.noLoop()
+                    p5.noLoop()
                 }
             }
         }
