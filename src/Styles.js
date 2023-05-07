@@ -9,7 +9,7 @@ export const styles = {
     },
     imgWidth: (isMobile ? 100 : 300),
     tagImgWidth: (isMobile ? 35 : 70),
-    sectionWidth: (isMobile ? 70 : 60), //vw
+    sectionWidth: (isMobile ? 70 : 80), //vw
     bgColor: "rgba(0, 0, 0, 0.3)",
     minContentWidth: (isMobile ? 0 : 319),
     contentScale: (isMobile ? 25 : 64),

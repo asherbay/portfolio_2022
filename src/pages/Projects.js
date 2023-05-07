@@ -7,6 +7,8 @@ import vocalPic from '../images/vocalpic.png'
 import portfolioPic from '../images/portfoliopic.png'
 import digitPic from '../images/DigitDial.png'
 import playerPic from '../images/PopupPlayer.png'
+import autoTyperPic from '../images/AutoTyper.png'
+
 import {styles} from '../Styles'
 import {isMobile} from 'react-device-detect'
 
@@ -21,6 +23,10 @@ const Projects = () => {
 
             <Project y={-15} pic={vocalPic}  name="Vocal" url="https://vocaljournal.herokuapp.com/" techTags={['React', 'Ruby+Rails', 'MUI']}>
                 A full stack audio journal app featuring user authentication, usage analytics, and cloud data storage/retrieval.
+            </Project>
+
+            <Project y={-15} pic={autoTyperPic}  name="Auto Typer" url="https://codesandbox.io/s/autotyper-929sio" techTags={['React']}>
+                A UI component that reveals text one character at a time in rapid succession, as if typing.
             </Project>
 
             <Project y={-15} pic={digitPic}  name="Digit Scroller" url="https://codesandbox.io/s/digit-dial-q30lc6?file=/" techTags={['React', 'Styled']}>

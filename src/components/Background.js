@@ -30,9 +30,9 @@ const Background = () => {
     let paused = false
     let pauseDelay = null
 
-    useEffect(()=>{
-        // console.log("Bg component mounted")
-    }, [])
+    // useEffect(()=>{
+    //     // console.log("Bg component mounted")
+    // }, [])
 
 
 
@@ -122,31 +122,31 @@ const Background = () => {
             
         }
         
-        p5.mouseMoved = () => {
-            if(pauseDelay){
-                clearTimeout(pauseDelay)
+        // p5.mouseMoved = () => {
+        //     // if(pauseDelay){
+        //     //     clearTimeout(pauseDelay)
                 
-            }
-            // console.log('mouse')
-            // morphDuration = frameRate * 0.5
-            p5.loop()
-            paused = false
-            pauseDelay = setTimeout(()=>{
-                // console.log('pause')
-                paused = false
-            }, 100)
-        }
+        //     // }
+        //     // console.log('mouse')
+        //     // morphDuration = frameRate * 0.5
+        //     // p5.loop()
+        //     // paused = false
+        //     // pauseDelay = setTimeout(()=>{
+        //     //     // console.log('pause')
+        //     //     paused = false
+        //     // }, 100)
+        // }
         p5.draw = () => {
             // console.log('draw')
             p5.noStroke()
             p5.background(p5.color(0, 0, 0, 255)) 
-            if(morphTimer===0){
-                frameRate = 100
-                p5.frameRate(100)
-            } else {
-                frameRate = 30
-                p5.frameRate(30)
-            }
+            // if(morphTimer===0){
+            //     frameRate = 25
+            //     p5.frameRate(frameRate)
+            // } else {
+            //     frameRate = 25
+            //     p5.frameRate(frameRate)
+            // }
             let prog = morphTimer/morphDuration
             if(currentShape){
                 p5.echo(currentShape[0], currentShape[1], [p5.windowWidth/2, p5.windowHeight/2], p5.lerp(mag1.current[0], nextMag1.current[0], prog), p5.lerp(mag1.current[1], nextMag1.current[1], prog), p5.color(10, 3, 255, 5), p5.color(255, 255, 255, 0), 1, 50)
