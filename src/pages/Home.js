@@ -212,7 +212,7 @@ const Home = () => {
                 indexY = i
             }
         }
-        console.log('x:', indexX, 'y:', indexY)
+        // console.log('x:', indexX, 'y:', indexY)
         setFacePic(faceAngles[indexX][indexY])
 
 
@@ -225,7 +225,7 @@ const Home = () => {
             <Body y={5} >
             
             <ProfPic src={aiPic} />
-                I'm Asher Bay, a developer in Salt Lake City, Utah. I build websites and apps with React and Ruby on Rails. I love obsessing over interesting projects and figuring out new tools. I discovered my passion for programming in 2019 while studying music composition in college.<br/>In 2022 I graduated from DevPoint Labs, the University of Utah's full stack bootcamp. After that I began my current role as a software engineer intern developing a crypto-based browser game with Element United. 
+                Hello! I'm Asher Bay, a full stack <TextRoller keyword={"software"} rate={30}> engineer in Salt Lake City, Utah.</TextRoller> I build websites and apps, specializing in React and Ruby on Rails. I love obsessing over interesting projects and figuring out new tools. In 2019 I discovered my passion for programming while studying music composition in college.<br/>In 2022 I graduated from DevPoint Labs, the University of Utah's full stack bootcamp. After that I began my current role as a software engineer intern with Element United developing a crypto-based browser game. 
                 
             </Body>
             <Body >
@@ -310,6 +310,50 @@ export const VolUI = (props) => {
         </VolBox>
     )
 }
+
+//this could even be its own little UI project in portfolio
+export const TextRoller = (props) => {
+    const fullText = props.children.split('')
+    const [rolling, setRolling] = useState(false)
+    const [done, setDone] = useState(false)
+    const [rollInt, setRollInt] = useState(null)
+
+    const textElement = useRef()
+
+    let currentText = ""
+    let count = 0
+   
+    const roll = () => {
+        if(count<fullText.length){
+            currentText += fullText[count]
+            textElement.current.textContent = currentText
+            count++
+        } else {
+            clearInterval(rollInt)
+            setDone(true)
+        }
+    } 
+
+
+    const start = () => {
+        console.log('currentText', currentText)
+        if(currentText.length<1 && !done){
+            // console.log('start')
+            setRollInt(setInterval(roll, props.rate ? props.rate : 20))
+        } 
+        
+    }
+
+    return (
+        <span>
+            <span onClick={start} style={{cursor:'pointer'}}>
+                {props.keyword}
+            </span>
+            <span ref={textElement}>
+            </span>
+        </span>
+    )
+  }
 
 //                                <CSSTransition in={volOpen} timeout={{ enter: 250, exit: 250 }} classNames="openVol" > 
 
@@ -487,7 +531,7 @@ const Info = styled.section`
 `
 
 const ProfPic = styled.img`
-    width: ${styles.imgWidth*2}px;
+    width: ${styles.imgWidth*1.5}px;
     border-radius: 50%;
     float: right;
     margin-left: 10px;
