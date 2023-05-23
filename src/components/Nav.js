@@ -1,4 +1,4 @@
-import resume from '../images/resumeJune.pdf'
+import resume from '../images/resume23.pdf'
 import {Link, useLocation} from 'react-router-dom'
 import React, {useState, useEffect, } from 'react'
 import styled from 'styled-components'

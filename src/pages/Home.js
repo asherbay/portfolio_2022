@@ -224,8 +224,8 @@ const Home = () => {
         <Container >
             <Body y={5} >
             
-            <ProfPic src={aiPic} />
-                Hello! I'm Asher Bay, a full stack <TextRoller keyword={"software"} rate={30}> engineer in Salt Lake City, Utah.</TextRoller> I build websites and apps, specializing in React and Ruby on Rails. I love obsessing over interesting projects and figuring out new tools. In 2019 I discovered my passion for programming while studying music composition in college.<br/>In 2022 I graduated from DevPoint Labs, the University of Utah's full stack bootcamp. After that I began my current role as a software engineer intern with Element United developing a crypto-based browser game. 
+            <ProfPic src={pic} />
+                Hello! I'm Asher Bay, a full stack software engineer in Salt Lake City, Utah. I build websites and apps, specializing in React and Ruby on Rails. I love obsessing over interesting <PopupBox keyword="projects "></PopupBox>and figuring out new tools. In 2019 I discovered my passion for programming while studying music composition in college.<br/>In 2022 I graduated from DevPoint Labs, the University of Utah's full stack bootcamp. After that I began my current role as a software engineer intern with Element United developing a crypto-based browser game. 
                 
             </Body>
             <Body >
@@ -244,7 +244,7 @@ const Home = () => {
 
             <Body style={{overflow: 'hidden'}} >
 
-                When I'm not computer nerding I'm often music nerding (on the computer) making stuff like <AudioLink sel={selAudio===VacuumStudy && playerOpen} onClick={()=>{handlePlayerOpen(VacuumStudy)}} >this</AudioLink> or <AudioLink sel={selAudio===AIIM && playerOpen} onClick={()=>{handlePlayerOpen(AIIM)}}>this</AudioLink>.
+                When I'm not coding I'm often making music like <AudioLink sel={selAudio===VacuumStudy && playerOpen} onClick={()=>{handlePlayerOpen(VacuumStudy)}} >this</AudioLink> or <AudioLink sel={selAudio===AIIM && playerOpen} onClick={()=>{handlePlayerOpen(AIIM)}}>this</AudioLink>.
                 
                     
             </Body>
@@ -311,6 +311,21 @@ export const VolUI = (props) => {
     )
 }
 
+//floating popup box: another little UI tool to add to projects and use on home page
+export const PopupBox = (props) => {
+    const [show, setShow] = useState(false)
+    return (
+        <span onClick={()=>{setShow(!show)}}>
+            {props.keyword}
+            <CSSTransition classNames="popup" in={show} timeout={500}>
+                <Box>
+                    {props.content}
+                </Box>
+            </CSSTransition>
+        </span>
+    )
+}
+
 //this could even be its own little UI project in portfolio
 export const TextRoller = (props) => {
     const fullText = props.children.split('')
@@ -358,6 +373,11 @@ export const TextRoller = (props) => {
 //                                <CSSTransition in={volOpen} timeout={{ enter: 250, exit: 250 }} classNames="openVol" > 
 
 //value={audio.current!==null ? audio.current.duration / (audio.current.currentTime + 0.5) : 0}
+
+const Box = styled.span`
+  width: 100px;
+  height: 100px;
+`
 const Container = styled.section`
    display: flex;
    flex-direction: column;
@@ -531,7 +551,7 @@ const Info = styled.section`
 `
 
 const ProfPic = styled.img`
-    width: ${styles.imgWidth*1.5}px;
+    width: ${styles.imgWidth*1.2}px;
     border-radius: 50%;
     float: right;
     margin-left: 10px;
