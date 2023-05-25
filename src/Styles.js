@@ -12,6 +12,7 @@ export const styles = {
     sectionWidth: (isMobile ? 70 : 80), //vw
     bgColor: "rgba(0, 0, 0, 0.3)",
     minContentWidth: (isMobile ? 0 : 319),
+    maxContentWidth: (isMobile ? 800 : 500),
     contentScale: (isMobile ? 25 : 64),
     navWidth: (isMobile ? 116 : 350),
     contentGap: (isMobile ? 10 : 30),

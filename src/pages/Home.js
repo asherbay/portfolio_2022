@@ -8,7 +8,7 @@ import aiPic from '../images/ai_me.png'
 import jiraPic from '../images/jira.png'
 import npmPic from '../images/npm.png'
 
-
+import vuePic from '../images/vue.png'
 import jsPic from '../images/javascript.png'
 import htmlPic from '../images/html5.png'
 import cssPic from '../images/css3.png'
@@ -34,71 +34,24 @@ import playhead from '../images/playhead.png'
 import arrow from '../images/triangle.png'
 import {isMobile} from 'react-device-detect'
 
-import MUU from '../images/faceAngles/0 2.png'
-import MU from '../images/faceAngles/0 1.png'
-import MM from '../images/faceAngles/0 0.png'
-import MD from '../images/faceAngles/0 -1.png'
-import MDD from '../images/faceAngles/0 -2.png'
-
-import RUU from '../images/faceAngles/1 2.png'
-import RU from '../images/faceAngles/1 1.png'
-import RM from '../images/faceAngles/1 0.png'
-import RD from '../images/faceAngles/1 -1.png'
-import RDD from '../images/faceAngles/1 -2.png'
-
-import RRUU from '../images/faceAngles/2 2.png'
-import RRU from '../images/faceAngles/2 1.png'
-import RRM from '../images/faceAngles/2 0.png'
-import RRD from '../images/faceAngles/2 -1.png'
-import RRDD from '../images/faceAngles/2 -2.png'
 
 
-import LUU from '../images/faceAngles/-1 2.png'
-import LU from '../images/faceAngles/-1 1.png'
-import LM from '../images/faceAngles/-1 0.png'
-import LD from '../images/faceAngles/-1 -1.png'
-import LDD from '../images/faceAngles/-1 -2.png'
-
-import LLUU from '../images/faceAngles/-2 2.png'
-import LLU from '../images/faceAngles/-2 1.png'
-import LLM from '../images/faceAngles/-2 0.png'
-import LLD from '../images/faceAngles/-2 -1.png'
-import LLDD from '../images/faceAngles/-2 -2.png'
-
-const faceAngles = [
-    [LLUU, LLU, LLM, LLD, LLDD],
-    [LUU, LU, LM, LD, LDD],
-    [MUU, MU, MM, MD, MDD],
-    [RUU, RU, RM, RD, RDD],
-    [RRUU, RRU, RRM, RRD, RRDD],
-]
 
 const Home = () => {
 
     const [playerOpen, setPlayerOpen] = useState(false)
     const [selAudio, setSelAudio] = useState(null)
     const [selTitle, setSelTitle] = useState(null)
-    const [facePic, setFacePic] = useState(MM)
+
 
     const [playing, setPlaying] = useState(false)
     const [progInt, setProgInt] = useState(null)
     const [progress, setProgress] = useState(0)
-    const [mousePos, setMousePos] = useState({})
+
 
     const audio = useRef()
 
-    useEffect(() => {
 
-    
-        window.addEventListener('mousemove', LookAtCursor);
-    
-        return () => {
-          window.removeEventListener(
-            'mousemove',
-            LookAtCursor
-          );
-        };
-      }, []);
 
     useEffect(()=>{
         console.log('player: ' + playerOpen)
@@ -140,6 +93,7 @@ const Home = () => {
         {name: 'HTML', img: htmlPic},
         {name: 'CSS', img: cssPic},
         {name: 'React', img: reactPic},
+        {name: 'Vue', img: vuePic},
         {name: 'Ruby', img: rubyPic},
         {name: 'Rails', img: railsPic},
         {name: 'Postgres', img: postgresPic},
@@ -192,32 +146,7 @@ const Home = () => {
         }
     }
 
-    const LookAtCursor = (e) =>{
-        let mouseX = e.clientX
-        let mouseY = e.clientY
-        let width = window.innerWidth
-        let height = window.innerHeight
-        let relX = mouseX / width
-        let relY = mouseY / height
-
-        let indexX
-        for(let i=0; i<5; i++){
-            if(relX >= (i/5)){
-                indexX = i
-            }
-        }
-        let indexY
-        for(let i=0; i<5; i++){
-            if(relY >= (i/2/5)){
-                indexY = i
-            }
-        }
-        // console.log('x:', indexX, 'y:', indexY)
-        setFacePic(faceAngles[indexX][indexY])
-
-
-    }
-
+    
     
 
     return (
@@ -225,7 +154,7 @@ const Home = () => {
             <Body y={5} >
             
             <ProfPic src={pic} />
-                Hello! I'm Asher Bay, a full stack software engineer in Salt Lake City, Utah. I build websites and apps, specializing in React and Ruby on Rails. I love obsessing over interesting <PopupBox keyword="projects "></PopupBox>and figuring out new tools. In 2019 I discovered my passion for programming while studying music composition in college.<br/>In 2022 I graduated from DevPoint Labs, the University of Utah's full stack bootcamp. After that I began my current role as a software engineer intern with Element United developing a crypto-based browser game. 
+                Hello! I'm Asher Bay, a full stack software engineer in Salt Lake City, Utah. I build websites and apps, specializing in React and Ruby on Rails. I love obsessing over interesting <HoverPopup keyword="projects ">COOL PROJECT</HoverPopup>and figuring out new tools. In 2019 I discovered my passion for programming while studying music composition in college.<br/>In 2022 I graduated from DevPoint Labs, the University of Utah's full stack bootcamp. After that I began my current role as a software engineer intern with Element United developing a crypto-based browser game. 
                 
             </Body>
             <Body >
@@ -244,7 +173,7 @@ const Home = () => {
 
             <Body style={{overflow: 'hidden'}} >
 
-                When I'm not coding I'm often making music like <AudioLink sel={selAudio===VacuumStudy && playerOpen} onClick={()=>{handlePlayerOpen(VacuumStudy)}} >this</AudioLink> or <AudioLink sel={selAudio===AIIM && playerOpen} onClick={()=>{handlePlayerOpen(AIIM)}}>this</AudioLink>.
+                When I'm not coding I love making music like <AudioLink sel={selAudio===VacuumStudy && playerOpen} onClick={()=>{handlePlayerOpen(VacuumStudy)}} >this</AudioLink> or <AudioLink sel={selAudio===AIIM && playerOpen} onClick={()=>{handlePlayerOpen(AIIM)}}>this</AudioLink>.
                 
                     
             </Body>
@@ -312,19 +241,85 @@ export const VolUI = (props) => {
 }
 
 //floating popup box: another little UI tool to add to projects and use on home page
-export const PopupBox = (props) => {
+export const HoverPopup = (props) => {
     const [show, setShow] = useState(false)
+    const popupDOM = useRef()
+
+    useEffect(()=>{
+        popupDOM.current.style.display = "none"
+    }, [])
+    useEffect(()=>{
+        console.log('classNames:', popupDOM.current.classList)
+        if(show){
+            popupDOM.current.style.display = "inline"
+        } 
+        // else if (popupDOM.current.classList.contains("popup-exit-done")){
+        //     popupDOM.current.style.display = "none"
+        // }
+    }, [show])
+
+    const hide = () => {
+        popupDOM.current.style.display = "none"
+    }
     return (
-        <span onClick={()=>{setShow(!show)}}>
+        <ClickWord onMouseEnter={()=>{setShow(true)}} onMouseLeave={()=>{setShow(false)}} >
             {props.keyword}
-            <CSSTransition classNames="popup" in={show} timeout={500}>
-                <Box>
-                    {props.content}
-                </Box>
+            <CSSTransition appear classNames="popup" in={show==true} onExited={hide} timeout={{ enter: 500, exit: 500 }}>
+                <PopupBox ref={popupDOM} classNames="popup-contents" in={show}>
+                    {props.children}
+                </PopupBox>
             </CSSTransition>
-        </span>
+        </ClickWord>
     )
 }
+
+const ClickWord = styled.span`
+    cursor: pointer;
+`
+
+const PopupBox = styled.span`
+    
+    outline: 1px solid white;
+
+
+    &.popup-appear {
+        opacity: 0;
+      }
+
+    &.popup-appear-active {
+        opacity: 0;
+        transition: opacity 500ms;
+      }
+
+    &.popup-enter {
+        opacity: 0;
+        transform: scaleX(1)
+      }
+      
+    &.popup-enter-active {
+        opacity: 1;
+        transition: opacity 500ms;
+    }
+    &.popup-enter-done {
+        opacity:  1;
+      }
+    
+    &.popup-exit {
+        opacity: 1;
+    }
+    
+    &.popup-exit-active {
+      opacity: 0;
+      transition: opacity 500ms;
+    }
+    &.popup-exit-done {
+        opacity:  0;
+        display: none;
+      }
+
+
+    
+`
 
 //this could even be its own little UI project in portfolio
 export const TextRoller = (props) => {

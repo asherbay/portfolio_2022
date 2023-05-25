@@ -3,21 +3,25 @@ import styled from 'styled-components'
 import scale from './Scale'
 import useWindowSize from '../hooks/useWindowSize'
 import {styles} from '../Styles'
-const Body = (props) => {
+const Header = (props) => {
     const windowSize = useWindowSize()
     const ref = useRef(null)
     const [elementWidth, setElementWidth] = useState(ref.current ? ref.current.offsetWidth : null)
-    
+    const [windowWidth, setWindowWidth] = useState(window.innerWidth)
+
+    useEffect(()=>{
+        setWindowWidth(window.innerWidth)
+        // console.log('innerWidth', window.innerWidth)
+    }, [window.innerWidth])
 
     useEffect(()=>{
         setElementWidth(ref.current.offsetWidth)
    
     }, [])
-
-    useEffect(()=>{
+    // useEffect(()=>{
       
 
-    }, [elementWidth])
+    // }, [elementWidth])
 
     useEffect(()=>{
        setElementWidth(ref.current.offsetWidth)
@@ -26,19 +30,19 @@ const Body = (props) => {
 
 
     return (
-        <Banner ref={ref} y={props.y} width={elementWidth}>
+        <Banner ref={ref} y={props.y} width={elementWidth} windowWidth={windowWidth}>
             {props.children}
         </Banner>
     )
 }
-export default Body
+export default Header
 
 const Banner = styled.section`
     
     color: white;
     background-color: ${styles.bgColor};
     border: ${styles.borderWidth}px solid white;
-    width: ${styles.sectionWidth}vw;
+    width: ${props => (props.windowWidth < 1380 ? (styles.sectionWidth+"vw") : (1100+"px") )};
     text-align: center;
 
     @media screen and (max-width: 800px) {

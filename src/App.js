@@ -63,6 +63,7 @@ function App() {
         <Nav/>
       </Content>
       {/* <Background/> */}
+      {/* <Background/> */}
     </div>
   );
 }
