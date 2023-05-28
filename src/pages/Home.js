@@ -2,6 +2,10 @@ import React, {useState, useEffect, useRef} from 'react'
 import styled from 'styled-components'
 import Body from '../components/Body'
 import pic from '../images/smile001.png'
+import pic3 from '../images/hs2.jpg'
+
+
+import waveLapse from "../video/wave_lapse.mp4"
 import pic2 from '../images/face.png'
 import aiPic from '../images/ai_me.png'
 
@@ -47,11 +51,16 @@ const Home = () => {
     const [playing, setPlaying] = useState(false)
     const [progInt, setProgInt] = useState(null)
     const [progress, setProgress] = useState(0)
+    const [width, setWidth] = useState(window.innerWidth)
 
 
     const audio = useRef()
 
 
+    useEffect(()=>{
+        // console.log('player: ' + playerOpen
+        setWidth(window.innerWidth)
+    }, [window.innerWidth])
 
     useEffect(()=>{
         console.log('player: ' + playerOpen)
@@ -153,8 +162,16 @@ const Home = () => {
         <Container >
             <Body y={5} >
             
-            <ProfPic src={pic} />
-                Hello! I'm Asher Bay, a full stack software engineer in Salt Lake City, Utah. I build websites and apps, specializing in React and Ruby on Rails. I love obsessing over interesting <HoverPopup keyword="projects ">COOL PROJECT</HoverPopup>and figuring out new tools. In 2019 I discovered my passion for programming while studying music composition in college.<br/>In 2022 I graduated from DevPoint Labs, the University of Utah's full stack bootcamp. After that I began my current role as a software engineer intern with Element United developing a crypto-based browser game. 
+            <ProfPic src={pic3} />
+                Hello! I'm Asher Bay, a full stack software engineer in Salt Lake City, Utah. I build websites and apps, specializing in React and Ruby on Rails. I love obsessing over interesting projects 
+                     {/* <HoverPopup keyword="projects" title="Wave Lapse" width={350} 
+                     info="Wave Lapse is an audiovisual art installation that transforms the participant's voice into a rich soundscape with abstract visuals that dance to the sounds.
+                     ">
+                        <video width="320" height="240" controls>
+                            <source src={waveLapse} type="video/mp4"/>
+                        </video>
+                    </HoverPopup>{" "} */}
+                    {" "}and figuring out new tools. In 2019 I discovered my passion for programming while studying music composition in college.<br/>In 2022 I graduated from DevPoint Labs, the University of Utah's full stack bootcamp. After that I began my current role as a software engineer intern with Element United developing a crypto-based browser game. 
                 
             </Body>
             <Body >
@@ -178,7 +195,7 @@ const Home = () => {
                     
             </Body>
             <CSSTransition in={playerOpen} timeout={{ enter: 250, exit: 250 }} classNames="openPlayer" onEntered={()=>{setPlaying(true)}} > 
-                <Player>
+                <Player width={width}>
                     <audio src={selAudio} ref={audio}/>
                         <PlayerUI>
                             <PlayButton src={playing ? PausePic : PlayPic} onClick={togglePlayback}/>
@@ -243,44 +260,141 @@ export const VolUI = (props) => {
 //floating popup box: another little UI tool to add to projects and use on home page
 export const HoverPopup = (props) => {
     const [show, setShow] = useState(false)
+    const [hovering, setHovering] = useState(false)
+
+    const [showInfo, setShowInfo] = useState(false)
+
     const popupDOM = useRef()
 
     useEffect(()=>{
         popupDOM.current.style.display = "none"
     }, [])
     useEffect(()=>{
-        console.log('classNames:', popupDOM.current.classList)
+        console.log('show:', show)
         if(show){
             popupDOM.current.style.display = "inline"
         } 
-        // else if (popupDOM.current.classList.contains("popup-exit-done")){
-        //     popupDOM.current.style.display = "none"
-        // }
+        else if (popupDOM.current.classList.contains("popup-exit-done")){
+            popupDOM.current.style.display = "none"
+        }
     }, [show])
 
-    const hide = () => {
-        popupDOM.current.style.display = "none"
+    const hoverOn = () => {
+        
+        setHovering(true)
+        console.log('hoverOn')
+        if(!show){
+            setShow(true)
+        }
     }
+
+    const hoverOff = (e) => {
+        console.log('mouseOff', e)
+        setHovering(false)
+    }
+
+
+    const exitClick = (e) => {
+        let rect = popupDOM.current.getBoundingClientRect()
+        if(e.x>rect.left && e.x<rect.right && e.y<rect.bottom && e.y>rect.top){
+            console.log('clicked inside element')
+        } else {
+            setShow(false)
+
+        }
+        // if(!hovering){
+        //     console.log('exit')
+        //     setShow(false)
+        // }
+    }
+
+    window.addEventListener('click', exitClick)
+
+    
     return (
-        <ClickWord onMouseEnter={()=>{setShow(true)}} onMouseLeave={()=>{setShow(false)}} >
+        <ClickWord onMouseEnter={hoverOn} onMouseLeave={hoverOff} show={show}>
             {props.keyword}
-            <CSSTransition appear classNames="popup" in={show==true} onExited={hide} timeout={{ enter: 500, exit: 500 }}>
-                <PopupBox ref={popupDOM} classNames="popup-contents" in={show}>
-                    {props.children}
-                </PopupBox>
-            </CSSTransition>
+            <Pocket>
+                <CSSTransition onExiting={()=>{console.log('exiting')}} classNames="popup" in={show} timeout={500}>
+                    <PopupBox ref={popupDOM} classNames="popup-contents" width={props.width ? props.width : 200}>
+                        <PopupContents>
+                            {props.children}
+                            {showInfo ? 
+                                <PopupCard>
+                                    <h3>{props.title}</h3>
+                                    <span>
+                                        Wave Lapse is an audiovisual art installation that transforms the participant's voice into a rich soundscape with abstract visuals that dance to the sounds.
+                                    </span>
+                                </PopupCard> :
+                                <Expand>
+                                    <>
+                                    ►  
+                                    </>
+                                </Expand> 
+                            }
+                        </PopupContents>
+                    </PopupBox>
+                </CSSTransition>
+            </Pocket>
         </ClickWord>
     )
 }
 
+const Expand = styled.span`
+    height: 100%;
+    width: 10px;
+    margin-right: 10px;
+    background: linear-gradient(45deg, blue, red);
+    opacity: 0.5;
+    &>*{
+        position: relative;
+        top: -50px;
+    }
+`
+
+const PopupContents = styled.span`
+    &>h3{
+        font-size: 14pt;
+    }
+    font-size: 12pt;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+   
+`
 const ClickWord = styled.span`
     cursor: pointer;
+    text-decoration: none;
+    &:hover{
+        text-decoration: underline;
+    }
+   
+    
+`
+
+const Pocket = styled.span`
+    position: relative;
+    width: 0;
+    height: 0;
+
 `
 
 const PopupBox = styled.span`
     
-    outline: 1px solid white;
+    display: flex;
+    flex-direction: row;
+    
 
+    outline: 2px solid white;
+    position: absolute;
+    top: -260px;
+    left: -190px;
+   
+    background: black;
+
+    object-fit: cover;
+    overflow: hidden;
+    transform-origin: bottom;
 
     &.popup-appear {
         opacity: 0;
@@ -293,32 +407,38 @@ const PopupBox = styled.span`
 
     &.popup-enter {
         opacity: 0;
-        transform: scaleX(1)
+        width: 0px;
       }
       
     &.popup-enter-active {
         opacity: 1;
-        transition: opacity 500ms;
+        width: ${props => props.width ? props.width : 150}px;
+        transition: opacity, width 500ms;
     }
     &.popup-enter-done {
         opacity:  1;
+        width: ${props => props.width ? props.width : 150}px;
       }
     
     &.popup-exit {
         opacity: 1;
+        width: ${props => props.width ? props.width : 150}px;
     }
     
     &.popup-exit-active {
-      opacity: 0;
-      transition: opacity 500ms;
+        opacity: 0;
+        transition: opacity 250ms;
+      
     }
     &.popup-exit-done {
-        opacity:  0;
-        display: none;
-      }
+        opacity: 0;
+        width: 0px;
+    }
+`
 
-
-    
+const PopupCard = styled.span`
+    display: flex;
+    flex-direction: column;
 `
 
 //this could even be its own little UI project in portfolio
@@ -598,7 +718,7 @@ const Player = styled.section`
     background: ${styles.bgColor};
     border: ${styles.borderWidth}px solid white;
     border-top-width: 0px;
-    width: calc(${styles.sectionWidth}vw + ${styles.contentGap * 2}px);
+    width: calc(${props => props.width < 1380 ? (styles.sectionWidth+"vw") : (1100+"px")} + ${styles.contentGap * 2}px);
     font-size: ${styles.fontSizes.body}pt;
    
     padding-top: 0px;
