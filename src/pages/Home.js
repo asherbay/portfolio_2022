@@ -5,7 +5,6 @@ import pic from '../images/smile001.png'
 import pic3 from '../images/hs2.jpg'
 
 
-import waveLapse from "../video/wave_lapse.mp4"
 import pic2 from '../images/face.png'
 import aiPic from '../images/ai_me.png'
 
