@@ -46,7 +46,6 @@ const Home = () => {
     const [selAudio, setSelAudio] = useState(null)
     const [selTitle, setSelTitle] = useState(null)
 
-
     const [playing, setPlaying] = useState(false)
     const [progInt, setProgInt] = useState(null)
     const [progress, setProgress] = useState(0)
