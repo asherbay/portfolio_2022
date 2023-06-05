@@ -7,7 +7,8 @@ import vocalPic from '../images/vocalpic.png'
 import portfolioPic from '../images/portfoliopic.png'
 import digitPic from '../images/DigitDial.png'
 import playerPic from '../images/PopupPlayer.png'
-import autoTyperPic from '../images/AutoTyper.png'
+import autoTyperPic from '../images/autoTyperPic.png'
+import popupPic from '../images/popupPic.png'
 
 import {styles} from '../Styles'
 import {isMobile} from 'react-device-detect'
@@ -26,12 +27,16 @@ const Projects = () => {
                 An interactive audiovisual experience machine. Watch and listen as shapes and sounds evolve endlessly.
             </Project>
 
-            <Project y={-15} pic={autoTyperPic}  name="Auto Typer" url="https://codesandbox.io/s/autotyper-929sio" techTags={['React']}>
-                A UI component that animates text in rapid succession, as if typing.
-            </Project>
-
             <Project y={-15} pic={digitPic}  name="Digit Scroller" url="https://codesandbox.io/s/digit-dial-q30lc6?file=/" techTags={['React', 'Styled']}>
                 A UI tool for dialing in numbers at arbitrary levels of precision.
+            </Project>
+
+            <Project y={-15} pic={popupPic}  name="Pop Box" url="https://codesandbox.io/s/gallant-chihiro-vor5hk?file=/src/App.js" techTags={['React', 'CSSTransition']}>
+               An animated popup UI component.
+            </Project>
+
+            <Project y={-15} pic={autoTyperPic}  name="Auto Typer" url="https://codesandbox.io/s/autotyper-929sio" techTags={['React']}>
+                A UI component that animates text in rapid succession, as if typing.
             </Project>
 
             <Project y={-15} pic={playerPic}  name="Popup Player" url="https://codesandbox.io/s/popup-player-z6fdok" techTags={['React', 'CSSTransition']}>
@@ -47,3 +52,5 @@ const Projects = () => {
     )
 }
 export default Projects
+
+//https://codesandbox.io/s/gallant-chihiro-vor5hk?file=/src/App.js

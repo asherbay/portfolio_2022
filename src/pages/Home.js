@@ -4,9 +4,15 @@ import Body from '../components/Body'
 import pic from '../images/smile001.png'
 import pic3 from '../images/hs2.jpg'
 
+import PopBox from '../components/PopBox'
 
+import waveLapse from '../video/wave_lapse.mp4'
 import pic2 from '../images/face.png'
 import aiPic from '../images/ai_me.png'
+import gcaPic from '../images/GCA_PIC.png'
+import badgePic from '../images/badge.png'
+
+
 
 import jiraPic from '../images/jira.png'
 import npmPic from '../images/npm.png'
@@ -53,6 +59,8 @@ const Home = () => {
 
 
     const audio = useRef()
+    const wlVid = useRef()
+
 
 
     useEffect(()=>{
@@ -161,15 +169,25 @@ const Home = () => {
             <Body y={5} >
             
             <ProfPic src={pic3} />
-                Hello! I'm Asher Bay, a full stack software engineer in Salt Lake City, Utah. I build websites and apps, specializing in React and Ruby on Rails. I love obsessing over interesting projects 
-                     {/* <HoverPopup keyword="projects" title="Wave Lapse" width={350} 
+                Hello! I'm Asher Bay, a full stack software engineer in Salt Lake City, Utah. I build websites and apps, specializing in React and Ruby on Rails. I love obsessing over {" "} 
+                <PopBox keyword={"interesting projects"} link={'https://youtu.be/Zt4Jm-1O7nU'}>
+                    <video width="320" height="240" controls ref={wlVid}>
+                        <source src={waveLapse} type="video/mp4"/>
+                    </video>
+                    {/* <p> test </p> */}
+                </PopBox>
+                     {/* <HoverPopup keyword="interesting projects" title="Wave Lapse"  
                      info="Wave Lapse is an audiovisual art installation that transforms the participant's voice into a rich soundscape with abstract visuals that dance to the sounds.
                      ">
                         <video width="320" height="240" controls>
                             <source src={waveLapse} type="video/mp4"/>
                         </video>
                     </HoverPopup>{" "} */}
-                    {" "}and figuring out new tools. In 2019 I discovered my passion for programming while studying music composition in college.<br/>In 2022 I graduated from DevPoint Labs, the University of Utah's full stack bootcamp. After that I began my current role as a software engineer intern with Element United developing a crypto-based browser game. 
+                    {" "}and figuring out new tools. In 2019 I discovered my passion for programming while studying music composition in college.<br/>In 2022 I graduated from <PopBox keyword="DevPoint Labs" width={340} link={'https://www.credly.com/badges/8b3bb49d-8067-4889-bb10-31b64ffef345?source=linked_in_profile'}> <img src={badgePic}/></PopBox>, the University of Utah's full stack bootcamp. After that I began my current role as a software engineer intern with Element United developing a 
+                    {" "}<PopBox keyword="crypto-based browser game" width={500} link={'https://www.goldcrewatlas.com/'}>
+                        <img src={gcaPic} style={{width: "500px"}}/>
+                    </PopBox>.
+                     
                 
             </Body>
             <Body >
@@ -262,6 +280,9 @@ export const HoverPopup = (props) => {
 
     const [showInfo, setShowInfo] = useState(false)
 
+    const [mouseX, setMouseX] = useState(0)
+
+
     const popupDOM = useRef()
 
     useEffect(()=>{
@@ -277,10 +298,15 @@ export const HoverPopup = (props) => {
         }
     }, [show])
 
-    const hoverOn = () => {
+    useEffect(()=>{
+        console.log('mouseX', mouseX, window.innerWidth)
+    }, [mouseX])
+
+    const hoverOn = (e) => {
         
         setHovering(true)
-        console.log('hoverOn')
+        setMouseX(e.pageX)
+        console.log('hoverOn', e)
         if(!show){
             setShow(true)
         }
@@ -314,22 +340,26 @@ export const HoverPopup = (props) => {
             {props.keyword}
             <Pocket>
                 <CSSTransition onExiting={()=>{console.log('exiting')}} classNames="popup" in={show} timeout={500}>
-                    <PopupBox ref={popupDOM} classNames="popup-contents" width={props.width ? props.width : 200}>
+                    <PopupBox ref={popupDOM} classNames="popup-contents">
                         <PopupContents>
                             {props.children}
-                            {showInfo ? 
-                                <PopupCard>
-                                    <h3>{props.title}</h3>
-                                    <span>
-                                        Wave Lapse is an audiovisual art installation that transforms the participant's voice into a rich soundscape with abstract visuals that dance to the sounds.
-                                    </span>
-                                </PopupCard> :
-                                <Expand>
+                            <Pocket>
+                                <Expand onClick={()=>{window.open('https://youtu.be/Zt4Jm-1O7nU')}}>
                                     <>
-                                    ►  
+                                    ⓘ  
                                     </>
                                 </Expand> 
-                            }
+                            </Pocket>
+                            
+                                {/* <PopupCard>
+                                    <h3>{props.title}</h3>
+                                    <p>
+                                        Wave Lapse is an audiovisual art installation that transforms the participant's voice into a rich soundscape with abstract visuals that dance to the sounds.
+                                    </p>
+                                </PopupCard> */}
+                            
+                                
+                            
                         </PopupContents>
                     </PopupBox>
                 </CSSTransition>
@@ -339,15 +369,23 @@ export const HoverPopup = (props) => {
 }
 
 const Expand = styled.span`
-    height: 100%;
-    width: 10px;
-    margin-right: 10px;
-    background: linear-gradient(45deg, blue, red);
-    opacity: 0.5;
-    &>*{
-        position: relative;
-        top: -50px;
+    display: block;
+    position: absolute;
+    color: white;
+    left: -34px;
+    margin: 8px;
+    opacity: 1;
+    width: 0px;
+    font-weight: normal;
+    border-radius: 50%;
+    font-size: 12pt;
+    &:hover{
+        font-weight: 900;
+        font-size: 14pt;
+        top: -3px;
+        left: -35px;
     }
+
 `
 
 const PopupContents = styled.span`
@@ -356,8 +394,7 @@ const PopupContents = styled.span`
     }
     font-size: 12pt;
     display: flex;
-    align-items: center;
-    justify-content: space-between;
+    
    
 `
 const ClickWord = styled.span`
@@ -366,8 +403,7 @@ const ClickWord = styled.span`
     &:hover{
         text-decoration: underline;
     }
-   
-    
+    color: #24d674;
 `
 
 const Pocket = styled.span`
@@ -385,8 +421,8 @@ const PopupBox = styled.span`
 
     outline: 2px solid white;
     position: absolute;
-    top: -260px;
-    left: -190px;
+    
+    
    
     background: black;
 
@@ -410,17 +446,17 @@ const PopupBox = styled.span`
       
     &.popup-enter-active {
         opacity: 1;
-        width: ${props => props.width ? props.width : 150}px;
+        width: ${props => props.width ? props.width : 320}px;
         transition: opacity, width 500ms;
     }
     &.popup-enter-done {
         opacity:  1;
-        width: ${props => props.width ? props.width : 150}px;
+        width: ${props => props.width ? props.width : 320}px;
       }
     
     &.popup-exit {
         opacity: 1;
-        width: ${props => props.width ? props.width : 150}px;
+        width: ${props => props.width ? props.width : 320}px;
     }
     
     &.popup-exit-active {
@@ -434,9 +470,39 @@ const PopupBox = styled.span`
     }
 `
 
-const PopupCard = styled.span`
+const PopupCard = styled.div`
     display: flex;
     flex-direction: column;
+    height: 120px;
+    &.info-enter {
+        opacity: 0;
+        width: 0px;
+      }
+      
+    &.info-enter-active {
+        opacity: 1;
+        width: 200px;
+        transition: opacity, width 500ms;
+    }
+    &.info-enter-done {
+        opacity:  1;
+        width: 200px;
+      }
+    
+    &.info-exit {
+        opacity: 1;
+        width: 200px;
+    }
+    
+    &.info-exit-active {
+        opacity: 0;
+        transition: opacity 250ms;
+      
+    }
+    &.info-exit-done {
+        opacity: 0;
+        width: 0px;
+    }
 `
 
 //this could even be its own little UI project in portfolio
