@@ -169,7 +169,7 @@ const Home = () => {
             <Body y={5} >
             
             <ProfPic src={pic3} />
-                Hello! I'm Asher Bay, a full stack software engineer in Salt Lake City, Utah. I build websites and apps, specializing in React and Ruby on Rails. I love obsessing over {" "} 
+                Hello! I'm Asher Bay, a full stack software engineer in Salt Lake City, Utah. I build websites and apps, specializing in React and Ruby on Rails. I like obsessing over {" "} 
                 <PopBox keyword={"interesting projects"} link={'https://youtu.be/Zt4Jm-1O7nU'}>
                     <video width="320" height="240" controls ref={wlVid}>
                         <source src={waveLapse} type="video/mp4"/>
