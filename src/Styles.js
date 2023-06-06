@@ -18,4 +18,6 @@ export const styles = {
     contentGap: (isMobile ? 10 : 30),
     contentMargin: (isMobile ? 5 : 15),
     borderWidth: 1,
+    popupWidth: (isMobile ? 100 : 320),
+   
 }

@@ -2,6 +2,8 @@ import React, { useState, useRef, useEffect } from 'react';
 import './PopBox.css';
 import styled from 'styled-components'
 import { CSSTransition } from 'react-transition-group';
+import {styles} from '../Styles'
+
 
 function PopBox(props) {
   const [isHovered, setIsHovered] = useState(false);
@@ -84,7 +86,7 @@ function PopBox(props) {
         {props.keyword}
         </ClickWord>
         <CSSTransition classNames="popup" timeout={500} in={isHovered} onEntered={autoPlay}>
-             <Pop width={props.width ? props.width : 320}> {/*className="PopupBox-popup"> */}
+             <Pop width={props.width ? props.width : styles.popupWidth}> {/*className="PopupBox-popup"> */}
                 {props.children}
                 <Pocket>
                     <Expand onClick={openLink}>
