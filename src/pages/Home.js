@@ -171,7 +171,7 @@ const Home = () => {
             <ProfPic src={pic3} />
                 Hello! I'm Asher Bay, a full stack software engineer in Salt Lake City, Utah. I build websites and apps, specializing in React and Ruby on Rails. I like obsessing over {" "} 
                 <PopBox keyword={"interesting projects"} link={'https://youtu.be/Zt4Jm-1O7nU'}>
-                    <video width="320" height="240" controls ref={wlVid}>
+                    <video width={styles.popupWidth} height={styles.popupHeight} controls ref={wlVid}>
                         <source src={waveLapse} type="video/mp4"/>
                     </video>
                     {/* <p> test </p> */}
@@ -185,7 +185,7 @@ const Home = () => {
                     </HoverPopup>{" "} */}
                     {" "}and figuring out new tools. In 2019 I discovered my passion for programming while studying music composition in college.<br/>In 2022 I graduated from <PopBox keyword="DevPoint Labs" width={(isMobile ? 115 : 340)} link={'https://www.credly.com/badges/8b3bb49d-8067-4889-bb10-31b64ffef345?source=linked_in_profile'}> <img src={badgePic}/></PopBox>, the University of Utah's full stack bootcamp. After that I began my current role as a software engineer intern with Element United developing a 
                     {" "}<PopBox keyword="crypto-based browser game" width={(isMobile ? 166 : 500)} link={'https://www.goldcrewatlas.com/'}>
-                        <img src={gcaPic} style={{width: "500px"}}/>
+                        <img src={gcaPic} style={{width: isMobile ? "166px" : "500px"}}/>
                     </PopBox>.
                      
                 

@@ -86,7 +86,7 @@ function PopBox(props) {
         {props.keyword}
         </ClickWord>
         <CSSTransition classNames="popup" timeout={500} in={isHovered} onEntered={autoPlay}>
-             <Pop width={props.width ? props.width : styles.popupWidth}> {/*className="PopupBox-popup"> */}
+             <Pop width={props.width ? props.width : styles.popupWidth} height={styles.popupHeight}> {/*className="PopupBox-popup"> */}
                 {props.children}
                 <Pocket>
                     <Expand onClick={openLink}>
@@ -137,6 +137,7 @@ const Pop = styled.span`
     object-fit: cover;
     overflow: hidden;
     transform-origin: bottom;
+
 
     position: absolute;
     bottom: 100%;

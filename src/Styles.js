@@ -19,5 +19,6 @@ export const styles = {
     contentMargin: (isMobile ? 5 : 15),
     borderWidth: 1,
     popupWidth: (isMobile ? 100 : 320),
+    popupHeight: (isMobile ? 80 : 240),
    
 }
