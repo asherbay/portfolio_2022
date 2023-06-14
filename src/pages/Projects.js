@@ -9,6 +9,7 @@ import digitPic from '../images/DigitDial.png'
 import playerPic from '../images/PopupPlayer.png'
 import autoTyperPic from '../images/autoTyperPic.png'
 import popupPic from '../images/popupPic.png'
+import gcaPic from '../images/gca_smaller.png'
 
 import {styles} from '../Styles'
 import {isMobile} from 'react-device-detect'
@@ -23,8 +24,12 @@ const Projects = () => {
                 A full stack audio journal app featuring user authentication, usage analytics, and cloud data storage/retrieval.
             </Project>
 
-            <Project y={-15}  pic={droneFlowerPic} name="Drone Flower" techTags={['React', 'P5.js', 'Tone.js']} url="https://thirsty-babbage-5c55cb.netlify.app">
+            <Project y={-15}  pic={droneFlowerPic} name="Drone Flower" techTags={['React', 'P5.js', 'Tone.js']} url="https://droneflower.app">
                 An interactive audiovisual experience machine. Watch and listen as shapes and sounds evolve endlessly.
+            </Project>
+
+            <Project y={-15}  pic={gcaPic} name="Gold Crew Atlas" techTags={['Vue.js', 'Spring Boot']} url="https://www.goldcrewatlas.com/">
+            A free to play (F2P) idle browser game with cryptocurrency integration. GCA NFT holders will gain access to unique experiences and the ability to earn Element Digital Rewards.
             </Project>
 
             <Project y={-15} pic={digitPic}  name="Digit Scroller" url="https://codesandbox.io/s/digit-dial-q30lc6?file=/" techTags={['React', 'Styled']}>
